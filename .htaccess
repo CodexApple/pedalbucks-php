@@ -1,0 +1,12 @@
+php_value display_errors 1
+php_flag output_buffering on
+
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{THE_REQUEST} /public/([^\s?]*) [NC]
+RewriteRule ^ %1 [L,NE,R=302]
+
+RewriteRule ^((?!public/).*)$ public/$1 [L,NC]
+
+php_value display_errors 1
