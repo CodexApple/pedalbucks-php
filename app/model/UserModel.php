@@ -39,8 +39,8 @@ class UserModel extends DatabaseManager
     public function read($action, $content)
     {
         if ($action == "read") {
-            $this->db->query("SELECT * FROM $this->table WHERE `uuid` = :uuid");
-            $this->db->bind(":uuid", $content);
+            $this->db->query("SELECT * FROM $this->table WHERE `username` = :content OR `email` = :content");
+            $this->db->bind(":content", $content);
 
             return $this->db->find();
         }
