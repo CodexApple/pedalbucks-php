@@ -1,8 +1,7 @@
 <?php
 
-namespace me\ghostly\utils;
-
-class StringUtils {
+class StringUtils
+{
 
     function guidv4($data)
     {

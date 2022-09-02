@@ -1,4 +1,5 @@
 <?php
+
 session_set_cookie_params(3600, '/', 'localhost');
 session_start();
 
@@ -10,10 +11,10 @@ $ROOT_URL = '/public/';
 require_once dirname(__DIR__) . '/core/database/Database.php';
 
 // Controllers
-require_once dirname(__DIR__) . '/application/controller/UserController.php';
+require_once dirname(__DIR__) . '/app/controller/UserController.php';
 
 // Models
-require_once dirname(__DIR__) . '/application/model/UserModel.php';
+require_once dirname(__DIR__) . '/app/model/UserModel.php';
 
 // Utils
 require_once dirname(__DIR__) . '/core/utils/FileUtils.php';
