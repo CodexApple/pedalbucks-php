@@ -39,14 +39,14 @@ class UserModel extends DatabaseManager
     public function read($action, $content)
     {
         if ($action == "read") {
-            $this->db->query("SELECT * FROM $this->table WHERE `username` = :content OR `email` = :content");
+            $this->db->query("SELECT * FROM $this->table WHERE `username` = :content OR `email` = :content OR `uuid` = :content OR `id` = :content");
             $this->db->bind(":content", $content);
 
             return $this->db->find();
         }
 
         if ($action == "check") {
-            $this->db->query("SELECT * FROM $this->table WHERE `username` = :username OR `user_email` = :email");
+            $this->db->query("SELECT * FROM $this->table WHERE `username` = :username OR `email` = :email");
             $this->db->bind(":username", $content);
             $this->db->bind(":email", $content);
 
@@ -54,8 +54,15 @@ class UserModel extends DatabaseManager
         }
 
         if ($action == "auth") {
-            $this->db->query("SELECT * FROM $this->table WHERE `username` = :username");
-            $this->db->bind(":username", $content['username']);
+            $this->db->query("SELECT * FROM $this->table WHERE `username` = :content OR `email` = :content");
+            $this->db->bind(":content", $content['uuid']);
+
+            return $this->db->find();
+        }
+
+        if ($action == "auth-api") {
+            $this->db->query("SELECT * FROM $this->table WHERE `username` = :content OR `email` = :content");
+            $this->db->bind(":content", $content);
 
             return $this->db->find();
         }

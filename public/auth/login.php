@@ -4,7 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/core/Core.php';
 
 if (isset($_POST['loginBtn'])) {
     $content = array("uuid" => $_POST['uuid'], "password" => $_POST['password']);
-    $auth->authUser($content);
+    $auth->Authenticate($content);
 }
 
 if (!empty($_SESSION['user'])) {

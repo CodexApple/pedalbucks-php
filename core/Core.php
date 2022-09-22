@@ -11,6 +11,7 @@ $ROOT_URL = '/public/';
 require_once dirname(__DIR__) . '/core/database/Database.php';
 
 // Controllers
+require_once dirname(__DIR__) . '/app/controller/system/AuthController.php';
 require_once dirname(__DIR__) . '/app/controller/UserController.php';
 
 // Models
@@ -23,7 +24,8 @@ require_once dirname(__DIR__) . '/core/utils/StringUtils.php';
 require_once dirname(__DIR__) . '/core/utils/UserUtils.php';
 
 // Objects
-$User = new UserController();
+$auth = new AuthController();
+$user = new UserController();
 
 // Utility
 $redirectUtils = new RedirectUtils();

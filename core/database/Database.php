@@ -13,10 +13,10 @@ class DatabaseManager
 
     public function __construct()
     {
-        $dbHost = '127.0.0.1';
+        $dbHost = '127.0.0.1:40000';
         $dbUser = 'root';
-        $dbPass = '';
-        $dbName = 'glist1_cache6272022';
+        $dbPass = 'root';
+        $dbName = 'beep_crms';
         $dbURL = 'mysql:host=' . $dbHost . ';dbname=' . $dbName;
 
         try {
