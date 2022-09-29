@@ -1,30 +1,36 @@
 <?php
 
-class ProfileController {
+class ProfileController
+{
     /** @var ProfileModel */
     private $var;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->var = new ProfileModel();
     }
 
-    public function saveData() {
+    public function saveData()
+    {
         return $this->var->create();
     }
 
-    public function getData($id) {
-        return $this->var->read("read", $id);
+    public function getData($id)
+    {
+        return $this->var->read($id);
     }
-    
-    public function getAllData() {
+
+    public function getAllData()
+    {
         return $this->var->readAll();
     }
 
-    public function updateData() {
-
+    public function updateData()
+    {
     }
 
-    public function deleteData($id) {
+    public function deleteData($id)
+    {
         return $this->var->delete($id);
     }
 }

@@ -16,6 +16,7 @@ class AuthController
 
         if ($credentials != null) {
             if ($this->getPassword($credentials->uuid, $content["password"])) {
+                $_SESSION["user"] = $credentials;
                 return header("Location: /account/");
             } else {
                 header("Location: /auth/login?error=202");

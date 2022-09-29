@@ -37,7 +37,7 @@ class ProfileModel extends DatabaseManager
         $this->db->query("SELECT * FROM $this->table WHERE `user_uuid` = :uuid");
         $this->db->bind(":uuid", $id);
 
-        return $this->db->execute();
+        return $this->db->find();
     }
 
     public function readAll()

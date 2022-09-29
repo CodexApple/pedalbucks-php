@@ -1,4 +1,4 @@
-<?php $profileInfo = $profile->getData($_SESSION['user']->user_uuid); ?>
+<?php $profileInfo = $profile->getData($_SESSION['user']->uuid); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,6 +9,7 @@
     <title>Circle.gg | Dashboard</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="/assets/js/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
     <link rel="stylesheet" href="/assets/js/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="/assets/js/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -90,7 +91,7 @@
                         <img src="/assets/img/default_pfp.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block"><?= $profileInfo->profile_fname . " " . $profileInfo->profile_lname; ?></a>
+                        <a href="#" class="d-block"><?= $profileInfo->firstname . " " . $profileInfo->lastname; ?></a>
                     </div>
                 </div>
 
@@ -111,39 +112,117 @@
                     <ul class="nav nav-pills nav-sidebar nav-child-indent flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-school"></i>
+                                <i class="fas fa-tools"></i>
                                 <p>
-                                    School Publications
+                                    Administrative Board
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        <i class="fas fa-folder nav-icon"></i>
-                                        <p>My Files</p>
+                                        <i class="fas fa-book"></i>
+                                        <p>System Logs</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        <i class="fas fa-file-alt nav-icon"></i>
-                                        <p>My Submission</p>
+                                        <i class="fas fa-tools"></i>
+                                        <p>
+                                            Website Settings
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
                                     </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                <i class="fas fa-folder nav-icon"></i>
+                                                <p>Advertisements</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                <i class="fas fa-folder nav-icon"></i>
+                                                <p>Web Features</p>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
-                                <?php if ($_SESSION['user']->user_usertype == 0 || $_SESSION['user']->user_usertype == 1) : ?>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>School Repository</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Published Papers</p>
-                                        </a>
-                                    </li>
-                                <?php endif; ?>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="fas fa-coins"></i>
+                                        <p>
+                                            Economy Tools
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                <i class="fas fa-folder nav-icon"></i>
+                                                <p>Economy List</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                <i class="fas fa-folder nav-icon"></i>
+                                                <p>Task List</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <p>
+                                            Product Tools
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                <i class="fas fa-folder nav-icon"></i>
+                                                <p>Brand List</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                <i class="fas fa-folder nav-icon"></i>
+                                                <p>Category List</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                <i class="fas fa-folder nav-icon"></i>
+                                                <p>Product List</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="fas fa-users"></i>
+                                        <p>
+                                            User Tools
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                <i class="fas fa-folder nav-icon"></i>
+                                                <p>Profile List</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                <i class="fas fa-folder nav-icon"></i>
+                                                <p>User List</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
                     </ul>
