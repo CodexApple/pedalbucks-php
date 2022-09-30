@@ -4,7 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/core/Core.php';
 
 if (isset($_POST['registerBtn'])) {
     if ($user->saveData()) {
-        return header("Location: /auth/login?status=Success");
+        header("Location: /auth/login?status=Success");
     }
 }
 

@@ -16,4 +16,11 @@ class RedirectUtils
             echo '<script> window.location.replace("localhost/auth/404"); </script>';
         }
     }
+
+    public function setData($field, $content)
+    {
+        if ($field == null || $content == null) {
+            require_once $_SERVER['DOCUMENT_ROOT'] . '/public/include/inject/IAdmin.php';
+        }
+    }
 }

@@ -9,11 +9,13 @@ $(document).ready(function() {
         "lengthChange": true,
         "autoWidth": true,
         'ajax': {
-            "url": "/account/dataset/userData.php",
+            "url": "/account/api/users.php?datatable",
             "type": "GET"
         },
         'columns': [{
             "data": 'db_id'
+        }, {
+            "data": 'uuid'
         }, {
             "data": 'username'
         }, {
@@ -23,10 +25,9 @@ $(document).ready(function() {
         }]
     });
 
-    // setInterval(getDate, 1000);
     setInterval(function () {
         userTable.ajax.reload();
-    }, 1000);
+    }, 5000);
 });
 
 // $("#userForm").submit(function(event) {

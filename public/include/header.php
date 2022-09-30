@@ -110,8 +110,8 @@
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar nav-child-indent flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item menu-open">
+                            <a href="#" class="nav-link active">
                                 <i class="fas fa-tools"></i>
                                 <p>
                                     Administrative Board
@@ -120,7 +120,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="?field=1&content=syslogs" class="nav-link">
                                         <i class="fas fa-book"></i>
                                         <p>System Logs</p>
                                     </a>
@@ -135,13 +135,13 @@
                                     </a>
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link">
+                                            <a href="?field=2&content=advertisements" class="nav-link">
                                                 <i class="fas fa-folder nav-icon"></i>
                                                 <p>Advertisements</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link">
+                                            <a href="?field=2&content=features" class="nav-link">
                                                 <i class="fas fa-folder nav-icon"></i>
                                                 <p>Web Features</p>
                                             </a>
@@ -158,13 +158,13 @@
                                     </a>
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link">
+                                            <a href="?field=3&content=economy" class="nav-link">
                                                 <i class="fas fa-folder nav-icon"></i>
                                                 <p>Economy List</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link">
+                                            <a href="?field=3&content=task" class="nav-link">
                                                 <i class="fas fa-folder nav-icon"></i>
                                                 <p>Task List</p>
                                             </a>

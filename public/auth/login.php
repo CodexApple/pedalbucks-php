@@ -24,7 +24,9 @@ if (!empty($_SESSION['user'])) {
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="/assets/js/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="/assets/js/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/js/plugins/sweetalert2/sweetalert2.min.css" />
     <link rel="stylesheet" href="/assets/css/adminlte.min.css">
+    <script src="/assets/js/plugins/jquery/jquery.min.js"></script>
 </head>
 
 <body class="hold-transition login-page">
@@ -87,9 +89,31 @@ if (!empty($_SESSION['user'])) {
         </div>
     </div>
 
-    <script src="/assets/js/plugins/jquery/jquery.min.js"></script>
+    <?php
+
+    if (isset($_GET['error'])) {
+        switch ($_GET['error']) {
+            case 201:
+                $stringUtils->setMessage("info", "Session timed out, please log in again.");
+                break;
+            case 202:
+                $stringUtils->setMessage("error", "Invalid Username or Password.");
+                break;
+            case 203:
+                $stringUtils->setMessage("error", "Invalid Username or Password.");
+                break;
+            default:
+                $stringUtils->setMessage("warning", "Error message invalid. Please contact developer");
+                break;
+        }
+    }
+
+    ?>
+
     <script src="/assets/js/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/assets/js/adminlte.min.js"></script>
+    <script src="/assets/js/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script src="/assets/js/plugins/toastr/toastr.min.js"></script>
 </body>
 
 </html>

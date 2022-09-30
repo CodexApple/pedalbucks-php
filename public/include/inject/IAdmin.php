@@ -23,7 +23,7 @@
                         <h3 class="card-title">Statistics and Quick Links</h3>
                     </div>
                     <div class="card-body">
-                        <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/public/api/webstats.php'; ?>
+                        <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/public/include/inject/IStatistics.php'; ?>
                     </div>
                 </div>
             </div>
@@ -48,6 +48,7 @@
                             <thead>
                                 <tr>
                                     <th>Database ID</th>
+                                    <th>UUID</th>
                                     <th>Username</th>
                                     <th>Email</th>
                                     <th>Password</th>

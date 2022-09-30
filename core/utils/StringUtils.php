@@ -12,4 +12,64 @@ class StringUtils
 
         return vsprintf('%s-%s-%s-%s', str_split(bin2hex($data), 4));
     }
+
+    // $icon = error, warning, info, success
+    public function setMessage($icon, $message)
+    {
+        echo '
+        <script>
+            $(document).ready(function() {
+                var Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showCloseButton: true,
+                    showConfirmButton: false,
+                    timer: 5000,
+                    timerProgressBar: true
+                });
+
+                Toast.fire({
+                    icon: "' . $icon . '",
+                    title: "' . $message . '"
+                });
+
+            });
+        </script>
+        ';
+    }
+
+    public function getRequestMethod()
+    {
+        if (isset($_GET['field']) && isset($_GET['content'])) {
+            return true;
+        }
+    }
+
+    public function getActiveMenu($field)
+    {
+        if (!isset($_GET['field'])) {
+            return "";
+        } else {
+            if ($field == 1) {
+                return "menu-open";
+            } elseif ($field == 2) {
+                return "menu-open";
+            }
+        }
+    }
+
+    public function getActiveLink($field, $content)
+    {
+        if (!isset($_GET['field']) && !isset($_GET['content'])) {
+            return "";
+        } else {
+            if ($field == "1" && $content == "syslogs") {
+                return "active";
+            } elseif ($field == "2" && $content == "advertisements") {
+                return "active";
+            } elseif ($field == "2" && $content == "features") {
+                return "active";
+            }
+        }
+    }
 }
