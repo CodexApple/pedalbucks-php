@@ -4,15 +4,22 @@ class LogController
 {
     /** @var LogModel */
     private $var;
+    private $date;
 
     public function __construct()
     {
         $this->var = new LogModel();
+        $this->date = new DateTime("now");
     }
 
-    public function saveData()
+    // types; 0 = success, 1 = warning, 2 = error;
+    public function saveData($type, $name, $desc)
     {
-        return $this->var->create();
+        $uuid = $_SESSION['user']->uuid;
+        $date = $this->date->format('Y-m-d');
+        $time = $this->date->format('H:i:s');
+
+        return $this->var->create($uuid, $type, $name, $desc, $date, $time, $read = 1, $archive = 1);
     }
 
     public function getData($id)

@@ -38,6 +38,16 @@ class StringUtils
         ';
     }
 
+    public function translateTask($int)
+    {
+        return $int == 1 ? "NO" : ($int == 0 ? "YES" : null);
+    }
+
+    public function coloredTask($int)
+    {
+        return $int == 1 ? "danger" : ($int == 0 ? "success" : null);
+    }
+
     public function getRequestMethod()
     {
         if (isset($_GET['field']) && isset($_GET['content'])) {

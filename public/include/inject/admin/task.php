@@ -16,6 +16,78 @@
 
 <div class="content">
     <div class="container-fluid">
+
+        <?php
+        if (isset($_GET['action'])) {
+            if ($_GET['action'] == "success") {
+                $stringUtils->setMessage("success", "Successfully added a new task.");
+            } else {
+                $stringUtils->setMessage("error", "Failed to add new task.");
+            }
+        }
+        ?>
+
+        <!-- Modal -->
+        <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <form id="taskForm" class="modal-content" method="POST" action="/account/">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Create New Task</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Task Name</label>
+                                <input type="text" name="name" class="form-control" placeholder="Enter task name" required />
+                            </div>
+                            <div class="form-group">
+                                <label>Task Description</label>
+                                <input type="text" name="description" class="form-control" placeholder="Enter task description" required />
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Distance <i class="text-danger">(Required)</i></label>
+                                        <input type="text" name="taskDistance" class="form-control" placeholder="Enter task distance" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Reward <i class="text-danger">(Required)</i></label>
+                                        <input type="text" name="reward" class="form-control" placeholder="Enter reward value" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Challenge <i class="text-danger">(Required)</i></label>
+                                <select form="taskForm" name="isChallenge" class="form-control">
+                                    <option value="1">No</option>
+                                    <option value="0">Yes</option>
+                                </select>
+                            </div>
+                            <!-- <div class="custom-file">
+                                <input type="file" name="file" class="custom-file-input" id="customFile" required />
+                                <label class="custom-file-label" for="customFile">Choose File...</label>
+                            </div> -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-warning" data-dismiss="modal">
+                                <i class="fas fa-times-circle"></i>
+                                <span>Cancel</span>
+                            </button>
+                            <button type="submit" name="uploadTaskBtn" class="btn btn-primary">
+                                <i class="fas fa-upload"></i>
+                                <span>Create Task</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
@@ -38,7 +110,7 @@
                             <!-- <span class="badge bg-teal">DEBUG MODE</span> -->
                             <i class="fas fa-upload"></i>Save Task
                         </button>
-                        <button class="btn btn-app bg-danger" data-toggle="modal" data-target="#uploadModal">
+                        <button class="btn btn-app bg-danger" data-toggle="modal" data-target="#resetModal">
                             <span class="badge bg-teal">DEBUG MODE</span>
                             <i class="fas fa-trash"></i>Reset Task
                         </button>
@@ -72,20 +144,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>#0123</td>
-                                    <td><span class="badge badge-pill bg-danger">NO</span></td>
-                                    <td>Sample Task</td>
-                                    <td>Sample Description</td>
-                                    <td>100</td>
-                                </tr>
-                                <tr>
-                                    <td>#0124</td>
-                                    <td><span class="badge bg-success">YES</span></td>
-                                    <td>Sample Task</td>
-                                    <td>Sample Description</td>
-                                    <td>100</td>
-                                </tr>
+                                <?php foreach ($task->getAllData() as $key => $data) : ?>
+                                    <tr>
+                                        <td>#<?= $data->id; ?></td>
+                                        <td><span class="badge badge-pill bg-<?= $stringUtils->coloredTask($data->is_challenge); ?>"><?= $stringUtils->translateTask($data->is_challenge); ?></span></td>
+                                        <td><?= $data->task_name; ?></td>
+                                        <td><?= $data->task_description; ?></td>
+                                        <td><?= $data->task_reward; ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>

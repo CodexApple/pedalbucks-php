@@ -2,6 +2,16 @@
 
 require_once $_SERVER["DOCUMENT_ROOT"] . '/core/Core.php';
 
+switch ($_SERVER['REQUEST_METHOD']) {
+    case "POST":
+        if (isset($_POST['uploadTaskBtn'])) {
+            if ($task->saveData()) {
+                $log->saveData(0, "Created new Task", $_SESSION['user']->username . " created a new task, detailed link: pedalbucks.gq?taskid");
+                header("Location: /account/?field=3&content=task&action=success");
+            } else header("Location: /account/?field=3&content=task&action=failed");
+        }
+}
+
 if (empty($_SESSION['user'])) {
     header('Location: /auth/login?error=201');
 }
@@ -10,8 +20,8 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/public/include/header.php';
 
 $field = isset($_GET["field"]) ? $_GET["field"] : null;
 $content = isset($_POST["content"]) ? $_POST["content"] : null;
-switch ($_SESSION['user']->usertype) {
 
+switch ($_SESSION['user']->usertype) {
     case 1:
         if (!isset($_GET['field']) && !isset($_GET['content'])) {
             require_once $_SERVER['DOCUMENT_ROOT'] . '/public/include/inject/IAdmin.php';
@@ -30,8 +40,16 @@ switch ($_SESSION['user']->usertype) {
         }
         break;
     case 2:
+        if (!isset($_GET['field']) && !isset($_GET['content'])) {
+            require_once $_SERVER['DOCUMENT_ROOT'] . '/public/include/inject/ISponsor.php';
+        } else {
+        }
         break;
     case 3:
+        if (!isset($_GET['field']) && !isset($_GET['content'])) {
+            require_once $_SERVER['DOCUMENT_ROOT'] . '/public/include/inject/IUser.php';
+        } else {
+        }
         break;
     default:
         break;

@@ -37,16 +37,20 @@
                                     <th>Level</th>
                                     <th>Date</th>
                                     <th>Time</th>
-                                    <th>Action</th>
                                     <th>Name</th>
+                                    <th>Description</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <?php foreach ($log->getAllData() as $key => $data) : ?>
+                                    <tr>
+                                        <td><?= $data->log_type ?></td>
+                                        <td><?= $data->log_date ?></td>
+                                        <td><?= $data->log_time ?></td>
+                                        <td><?= $data->log_name ?></td>
+                                        <td><?= $data->log_description ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>

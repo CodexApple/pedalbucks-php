@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="/assets/js/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 
     <link rel="stylesheet" href="/assets/css/adminlte.min.css">
+    <link rel="stylesheet" href="/assets/js/plugins/sweetalert2/sweetalert2.min.css" />
     <script src="/assets/js/plugins/jquery/jquery.min.js"></script>
     <script src="/assets/js/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 </head>

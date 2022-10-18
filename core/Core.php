@@ -12,12 +12,16 @@ require_once dirname(__DIR__) . '/core/database/Database.php';
 
 // Controllers
 require_once dirname(__DIR__) . '/app/controller/system/AuthController.php';
+require_once dirname(__DIR__) . '/app/controller/system/LogController.php';
 require_once dirname(__DIR__) . '/app/controller/ProfileController.php';
+require_once dirname(__DIR__) . '/app/controller/TaskController.php';
 require_once dirname(__DIR__) . '/app/controller/UserController.php';
 
 // Models
+require_once dirname(__DIR__) . '/app/model/system/LogModel.php';
 require_once dirname(__DIR__) . '/app/model/ProfileModel.php';
 require_once dirname(__DIR__) . '/app/model/UserModel.php';
+require_once dirname(__DIR__) . '/app/model/TaskModel.php';
 
 // Utils
 require_once dirname(__DIR__) . '/core/utils/FileUtils.php';
@@ -27,8 +31,10 @@ require_once dirname(__DIR__) . '/core/utils/UserUtils.php';
 
 // Objects
 $auth = new AuthController();
+$log = new LogController();
 $user = new UserController();
 $profile = new ProfileController();
+$task = new TaskController();
 
 // Utility
 $redirectUtils = new RedirectUtils();

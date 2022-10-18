@@ -27,7 +27,7 @@ $(document).ready(function() {
 
     setInterval(function () {
         userTable.ajax.reload();
-    }, 5000);
+    }, 10000);
 });
 
 // $("#userForm").submit(function(event) {
