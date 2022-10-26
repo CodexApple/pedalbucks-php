@@ -13,6 +13,11 @@ class StringUtils
         return vsprintf('%s-%s-%s-%s', str_split(bin2hex($data), 4));
     }
 
+    public function translateContent($id)
+    {
+        return ($id != 1 ? "Yes" : "No");
+    }
+
     // $icon = error, warning, info, success
     public function setMessage($icon, $message)
     {

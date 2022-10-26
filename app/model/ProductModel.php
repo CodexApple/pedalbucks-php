@@ -31,7 +31,7 @@ class ProductModel
 
     public function read($id)
     {
-        $this->db->query("SELECT * FROM $this->table WHERE `user_uuid` = :id");
+        $this->db->query("SELECT * FROM $this->table WHERE `id` = :id");
         $this->db->bind(":id", $id);
 
         return $this->db->find();

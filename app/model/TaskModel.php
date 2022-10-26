@@ -32,7 +32,7 @@ class TaskModel
 
     public function read($id)
     {
-        $this->db->query("SELECT * FROM $this->table WHERE `user_uuid` = :id");
+        $this->db->query("SELECT * FROM $this->table WHERE `id` = :id");
         $this->db->bind(":id", $id);
 
         return $this->db->find();
@@ -51,7 +51,7 @@ class TaskModel
 
     public function delete($id)
     {
-        $this->db->query("DELETE * FROM $this->table WHERE `user_uuid` = :id");
+        $this->db->query("DELETE * FROM $this->table WHERE `id` = :id");
         $this->db->bind(":id", $id);
 
         return $this->db->execute();
