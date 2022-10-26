@@ -58,7 +58,7 @@ window.addEventListener('DOMContentLoaded', event => {
 
 });
 
-// const jsonQuery = JSON.stringify({ username: "MilkyTune", email: "milkytune@elk.support.gg", password: "root", submit: "registerBtn" });
+// const jsonQuery = JSON.stringify({ username: "MilkyTune2", email: "milkytune2@elk.support.gg", password: "root", submit: "registerBtn" });
 // (async () => {
 //     const rawResponse = await fetch('http://localhost/account/api/register', {
 //         method: 'POST',

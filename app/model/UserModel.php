@@ -33,7 +33,7 @@ class UserModel extends DatabaseManager
         $lastId = $this->db->handler->lastInsertId();
         $this->db->handler->commit();
 
-        return $lastId;
+        return $uuid;
     }
 
     public function read($action, $content)

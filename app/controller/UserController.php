@@ -58,6 +58,11 @@ class UserController
         return $this->var->read("read", $id);
     }
 
+    public function getDataRecord($string, $id)
+    {
+        return $this->var->read($string, $id);
+    }
+
     public function getAllData()
     {
         return $this->var->readAll();

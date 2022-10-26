@@ -10,9 +10,15 @@ class ProfileController
         $this->var = new ProfileModel();
     }
 
-    public function saveData()
+    public function saveData($uid, $fname, $lname)
     {
-        return $this->var->create();
+        $mname = "";
+        $telephone = "";
+        $cellphone = "";
+        $address = "";
+        $birthday = "";
+
+        return $this->var->create($uid, $fname, $mname, $lname, $telephone, $cellphone, $address, $birthday);
     }
 
     public function getData($id)
