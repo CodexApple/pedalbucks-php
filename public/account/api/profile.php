@@ -27,7 +27,14 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
         break;
     case "POST":
-        if ($profile->saveData($response->uuid, $response->firstname, $response->lastname)) {
+        if ($profile->saveData(
+            $response->uuid,
+            $response->firstname,
+            $response->lastname,
+            $response->cellphone,
+            $response->address,
+            $response->birthday
+        )) {
             echo json_encode(
                 array(
                     "status" => "Success",
