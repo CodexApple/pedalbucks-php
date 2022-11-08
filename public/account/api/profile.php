@@ -30,7 +30,11 @@ switch ($_SERVER['REQUEST_METHOD']) {
             $response->lastname,
             $response->cellphone,
             $response->address,
-            $response->birthday
+            $response->birthday,
+            $response->distance,
+            $response->height,
+            $response->weight,
+            $response->calories
         )) {
             echo json_encode(
                 array(
