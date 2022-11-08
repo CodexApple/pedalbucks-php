@@ -31,6 +31,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
             $response->cellphone,
             $response->address,
             $response->birthday,
+            $response->type,
             $response->distance,
             $response->height,
             $response->weight,

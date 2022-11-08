@@ -14,10 +14,10 @@ class ProfileModel extends DatabaseManager
         $this->db = new DatabaseManager();
     }
 
-    public function create($uid, $fname, $mname, $lname, $telephone, $cellphone, $address, $birthday, $distance, $height, $weight, $calories, $archive = 1)
+    public function create($uid, $fname, $mname, $lname, $telephone, $cellphone, $address, $birthday, $type, $distance, $height, $weight, $calories, $archive = 1)
     {
-        $this->db->query("INSERT INTO $this->table (`user_uuid`, `firstname`, `middlename`, `lastname`, `telephone`, `cellphone`, `address`, `birthday`, `distance_goal`, `height`, `weight`, `calories`, `is_archive`)
-            VALUES (:uid, :fname, :mname, :lname, :telephone, :cellphone, :address, :birthday, :distance, :height, :weight, :calories, :archive)");
+        $this->db->query("INSERT INTO $this->table (`user_uuid`, `firstname`, `middlename`, `lastname`, `telephone`, `cellphone`, `address`, `birthday`, `type_choice`, `distance_goal`, `height`, `weight`, `calories`, `is_archive`)
+            VALUES (:uid, :fname, :mname, :lname, :telephone, :cellphone, :address, :birthday, :type, :distance, :height, :weight, :calories, :archive)");
 
         $this->db->bind(":uid", $uid);
         $this->db->bind(":fname", $fname);
@@ -27,6 +27,7 @@ class ProfileModel extends DatabaseManager
         $this->db->bind(":cellphone", $cellphone);
         $this->db->bind(":address", $address);
         $this->db->bind(":birthday", $birthday);
+        $this->db->bind(":type", $type);
         $this->db->bind(":distance", $distance);
         $this->db->bind(":height", $height);
         $this->db->bind(":weight", $weight);
