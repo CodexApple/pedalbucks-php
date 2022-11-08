@@ -10,9 +10,9 @@ class AcceptTaskController
         $this->var = new AcceptTaskModel();
     }
 
-    public function saveData($user_id, $task_id, $distance)
+    public function saveData($user_id, $task_id)
     {
-        return $this->var->create($user_id, $task_id, $distance);
+        return $this->var->create($user_id, $task_id);
     }
 
     public function getData($id)
@@ -25,7 +25,12 @@ class AcceptTaskController
         return $this->var->readAll();
     }
 
-    public function updateData()
+    public function updateData($action, $uuid, $task_id, $distance)
+    {
+        return $this->var->update($action, $uuid, $task_id, $distance);
+    }
+
+    public function updateCurrentTask($uuid, $task_id, $distance)
     {
     }
 

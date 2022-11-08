@@ -13,7 +13,7 @@ class AcceptTaskModel
         $this->db = new DatabaseManager();
     }
 
-    public function create($user_id, $task_id, $distance, $active = 0, $challenge = 1, $expired = 1, $complete = 1, $redeemed = 1, $archive = 1)
+    public function create($user_id, $task_id, $distance = 0, $active = 0, $challenge = 1, $expired = 1, $complete = 1, $redeemed = 1, $archive = 1)
     {
         $this->db->query("INSERT INTO $this->table (`user_uuid`, `task_id`, `distance`, `is_active`, `is_challenge`, `is_expired` `is_completed`, `is_redeemed`, `is_archive`)
             VALUES(:uid, :tid, :distance, :active, :challenge, :expired, :complete, :redeemed, :archive)");
@@ -46,8 +46,26 @@ class AcceptTaskModel
         return $this->db->findAll();
     }
 
-    public function update()
+    public function update($action, $uuid, $task_id, $distance)
     {
+        switch ($action) {
+            case "updateTask":
+                $this->db->query("UPDATE $this->table SET `distance` = :distance WHERE `user_uuid` = :user_uuid AND `is_active` = 0");
+                $this->db->bind(":user_uuid", $uuid);
+                $this->db->bind(":distance", $distance);
+
+                return $this->db->execute();
+                break;
+            case "updateOldTask":
+                $this->db->query("UPDATE $this->table SET `is_active` = 1, `is_archive` = 0 WHERE `user_uuid` = :user_uuid AND `is_active` = 0");
+                $this->db->bind(":user_uuid", $uuid);
+
+                return $this->db->execute();
+                break;
+            case "updateNewTask":
+
+                break;
+        }
     }
 
     public function delete($id)

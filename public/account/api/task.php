@@ -8,19 +8,54 @@ $response = json_decode($rawData);
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case "POST":
-        if (!empty($response->submit)) {
-            if ($response->id != null) {
-                $taskDetails = $task->getData($response->id);
-                if ($userTask->saveData($response->uuid, $response->id, $taskDetails->task_distance)) {
-                    echo json_encode(
-                        array(
-                            "status" => "Success",
-                            "message" => "Successfully accepted the Task!"
-                        ),
-                        JSON_PRETTY_PRINT
-                    );
+        switch ($response->submit) {
+            case "acceptBtn":
+                if (empty($userTask->getData($response->uuid))) {
+                    if ($response->id != null) {
+                        if ($userTask->saveData($response->uuid, $response->id)) {
+                            echo json_encode(
+                                array(
+                                    "status" => "Success",
+                                    "message" => "Successfully accepted the Task!"
+                                ),
+                                JSON_PRETTY_PRINT
+                            );
+                        }
+                    }
+
+                    return;
                 }
-            }
+
+                if ($userTask->updateData("updateOldTask", $response->uuid, $response->id, 0)) {
+                    if ($response->id != null) {
+                        if ($userTask->saveData($response->uuid, $response->id)) {
+                            echo json_encode(
+                                array(
+                                    "status" => "Success",
+                                    "message" => "Successfully accepted new task!"
+                                ),
+                                JSON_PRETTY_PRINT
+                            );
+                        }
+                    }
+                }
+                break;
+            case "updateBtn":
+                if ($taskDetails = $userTask->getData($response->uuid)) {
+                    $distanceAccumulated = ($taskDetails->distance + $response->distance);
+                    if ($userTask->updateData("updateTask", $response->uuid, 0, $distanceAccumulated)) {
+                        echo json_encode(array(
+                            "status" => "success",
+                            "message" => "Task distance updated successfully"
+                        ), JSON_PRETTY_PRINT);
+                    }
+                } else {
+                    echo json_encode(array(
+                        "status" => "failed",
+                        "message" => "Please accept a task from the task list."
+                    ), JSON_PRETTY_PRINT);
+                }
+                break;
         }
         break;
     case "GET":
