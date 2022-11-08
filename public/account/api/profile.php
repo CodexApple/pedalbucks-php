@@ -36,13 +36,16 @@ switch ($_SERVER['REQUEST_METHOD']) {
             $response->weight,
             $response->calories
         )) {
-            echo json_encode(
-                array(
-                    "status" => "Success",
-                    "message" => "Profile registered successfully",
-                ),
-                JSON_PRETTY_PRINT
-            );
+            if($dataProfile = $profile->getData($response->uuid)) {
+                echo json_encode(
+                    array(
+                        "status" => "Success",
+                        "message" => "Profile registered successfully",
+                        "profile" => $dataProfile
+                    ),
+                    JSON_PRETTY_PRINT
+                );
+            }
         } else {
             echo json_encode(
                 array(
