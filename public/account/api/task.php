@@ -63,12 +63,12 @@ switch ($_SERVER['REQUEST_METHOD']) {
             if ($taskDetails->is_expired == 1) {
                 echo json_encode(
                     array(
-                        "Task ID" => $taskDetails->id,
-                        "Task Name" => $taskDetails->task_name,
-                        "Task Description" => $taskDetails->task_description,
-                        "Distance Required" => $taskDetails->task_distance,
-                        "Reward" => $taskDetails->task_reward,
-                        "Challenge Mode" => $stringUtils->translateContent($taskDetails->is_challenge)
+                        "taskID" => $taskDetails->id,
+                        "taskName" => $taskDetails->task_name,
+                        "taskDescription" => $taskDetails->task_description,
+                        "distanceRequired" => $taskDetails->task_distance,
+                        "reward" => $taskDetails->task_reward,
+                        "challengeMode" => $stringUtils->translateContent($taskDetails->is_challenge)
                     ),
                     JSON_PRETTY_PRINT
                 );
@@ -79,11 +79,12 @@ switch ($_SERVER['REQUEST_METHOD']) {
             foreach ($taskDetails as $key => $data) {
                 if ($data->is_expired == 1) {
                     $array[] = array(
-                        "Task Name" => $data->task_name,
-                        "Task Description" => $data->task_description,
-                        "Distance Required" => $data->task_distance,
-                        "Reward" => $data->task_reward,
-                        "Challenge Mode" => $stringUtils->translateContent($data->is_challenge)
+                        "taskID" => $data->id,
+                        "taskName" => $data->task_name,
+                        "taskDescription" => $data->task_description,
+                        "distanceRequired" => $data->task_distance,
+                        "reward" => $data->task_reward,
+                        "challengeMode" => $stringUtils->translateContent($data->is_challenge)
                     );
                 }
             }
