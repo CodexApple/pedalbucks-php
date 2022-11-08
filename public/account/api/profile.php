@@ -10,9 +10,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
     case "GET":
         if (isset($_GET['uuid']) && $profileDetails = $profile->getData($_GET['uuid'])) {
             echo json_encode(
-                array(
-                    $profileDetails
-                ),
+                $profileDetails,
                 JSON_PRETTY_PRINT
             );
         } else {
@@ -24,7 +22,6 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 JSON_PRETTY_PRINT
             );
         }
-
         break;
     case "POST":
         if ($profile->saveData(

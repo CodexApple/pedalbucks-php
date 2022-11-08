@@ -13,15 +13,19 @@ class AcceptTaskModel
         $this->db = new DatabaseManager();
     }
 
-    public function create($user_id, $task_id, $challenge = 1, $complete = 1, $archive = 1)
+    public function create($user_id, $task_id, $distance, $active = 0, $challenge = 1, $expired = 1, $complete = 1, $redeemed = 1, $archive = 1)
     {
-        $this->db->query("INSERT INTO $this->table (`user_uuid`, `task_id`, `is_challenge`, `is_completed`, `is_archive`)
-            VALUES(:uid, :tid, :challenge, :complete, :archive)");
+        $this->db->query("INSERT INTO $this->table (`user_uuid`, `task_id`, `distance`, `is_active`, `is_challenge`, `is_expired` `is_completed`, `is_redeemed`, `is_archive`)
+            VALUES(:uid, :tid, :distance, :active, :challenge, :expired, :complete, :redeemed, :archive)");
 
         $this->db->bind(":uid", $user_id);
         $this->db->bind(":tid", $task_id);
+        $this->db->bind(":distance", $distance);
+        $this->db->bind(":active", $active);
         $this->db->bind(":challenge", $challenge);
+        $this->db->bind(":expired", $expired);
         $this->db->bind(":complete", $complete);
+        $this->db->bind(":redeemed", $redeemed);
         $this->db->bind(":archive", $archive);
 
         return $this->db->execute();

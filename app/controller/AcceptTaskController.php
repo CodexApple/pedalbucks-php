@@ -10,9 +10,9 @@ class AcceptTaskController
         $this->var = new AcceptTaskModel();
     }
 
-    public function saveData()
+    public function saveData($user_id, $task_id, $distance)
     {
-        return $this->var->create();
+        return $this->var->create($user_id, $task_id, $distance);
     }
 
     public function getData($id)
