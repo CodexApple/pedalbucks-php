@@ -15,7 +15,7 @@ class AcceptTaskModel
 
     public function create($user_id, $task_id, $distance = 0, $active = 0, $challenge = 1, $expired = 1, $complete = 1, $redeemed = 1, $archive = 1)
     {
-        $this->db->query("INSERT INTO $this->table (`user_uuid`, `task_id`, `distance`, `is_active`, `is_challenge`, `is_expired` `is_completed`, `is_redeemed`, `is_archive`)
+        $this->db->query("INSERT INTO $this->table (`user_uuid`, `task_id`, `distance`, `is_active`, `is_challenge`, `is_expired`, `is_completed`, `is_redeemed`, `is_archive`)
             VALUES(:uid, :tid, :distance, :active, :challenge, :expired, :complete, :redeemed, :archive)");
 
         $this->db->bind(":uid", $user_id);
