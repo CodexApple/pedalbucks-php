@@ -38,7 +38,7 @@ class AcceptTaskModel
                 $this->db->query("SELECT * FROM $this->table WHERE `user_uuid` = :id");
                 $this->db->bind(":id", $id);
 
-                return $this->db->find();
+                return $this->db->findAll();
                 break;
             case "readActiveTask":
                 $this->db->query("SELECT * FROM $this->table WHERE `user_uuid` = :id AND `is_active` = 1");
