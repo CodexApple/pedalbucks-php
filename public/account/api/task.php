@@ -79,6 +79,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                         "taskName" => $taskDetails->task_name,
                         "taskDescription" => $taskDetails->task_description,
                         "distanceRequired" => $taskDetails->task_distance,
+                        "taskDifficulty" => $data->task_difficulty,
                         "reward" => $taskDetails->task_reward,
                         "challengeMode" => $stringUtils->translateContent($taskDetails->is_challenge)
                     ),
@@ -95,6 +96,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                         "taskName" => $data->task_name,
                         "taskDescription" => $data->task_description,
                         "distanceRequired" => $data->task_distance,
+                        "difficulty" => $data->task_difficulty,
                         "reward" => $data->task_reward,
                         "challengeMode" => $stringUtils->translateContent($data->is_challenge)
                     );
@@ -112,6 +114,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                     "taskName" => $taskDetails->task_name,
                     "taskDescription" => $taskDetails->task_description,
                     "distanceRequired" => $taskDetails->task_distance,
+                    "difficulty" => $taskDetails->task_difficulty,
                     "reward" => $taskDetails->task_reward,
                     "challengeMode" => $stringUtils->translateContent($taskDetails->is_challenge),
                     "distanceProgress" => $userTaskDetails->distance,
