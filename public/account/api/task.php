@@ -76,40 +76,48 @@ switch ($_SERVER['REQUEST_METHOD']) {
                             
                         }
                     } else {
-                        if ($userTask->saveData($response->uuid, $response->id)) {
-                            $userTaskDetails = $userTask->getData("readActiveTask", $response->uuid, 0);
-                            $taskDetails = $task->getData($userTaskDetails->task_id);
-                            echo json_encode(
-                                array(
-                                    "status" => "Success",
-                                    "message" => "Successfully accepted the Task!",
-                                    "activeTask" => array(
-                                        "taskID" => $taskDetails->id,
-                                        "taskName" => $taskDetails->task_name,
-                                        "taskDescription" => $taskDetails->task_description,
-                                        "distanceRequired" => $taskDetails->task_distance,
-                                        "difficulty" => $taskDetails->task_difficulty,
-                                        "reward" => $taskDetails->task_reward,
-                                        "challengeMode" => $stringUtils->translateContent($taskDetails->is_challenge),
-                                        "distanceProgress" => $userTaskDetails->distance,
-                                        "userTaskActive" => $stringUtils->translateContent($userTaskDetails->is_active),
-                                        "userTaskChallenge" => $stringUtils->translateContent($userTaskDetails->is_challenge),
-                                        "userTaskExpired" => $stringUtils->translateContent($userTaskDetails->is_expired),
-                                        "userTaskCompleted" => $stringUtils->translateContent($userTaskDetails->is_completed),
-                                        "userTaskRedeemed" => $stringUtils->translateContent($userTaskDetails->is_redeemed),
-                                        "userTaskArchive" => $stringUtils->translateContent($userTaskDetails->is_archive),
-                                    )
-                                ),
-                                JSON_PRETTY_PRINT
-                            );
+                        if ($userTask->updateData("updateOldTask", $response->uuid, $response->id, 0)) {
+                            if ($userTask->saveData($response->uuid, $response->id)) {
+                                $userTaskDetails = $userTask->getData("readActiveTask", $response->uuid, 0);
+                                $taskDetails = $task->getData($userTaskDetails->task_id);
+                                echo json_encode(
+                                    array(
+                                        "status" => "Success",
+                                        "message" => "Successfully accepted the Task!",
+                                        "activeTask" => array(
+                                            "taskID" => $taskDetails->id,
+                                            "taskName" => $taskDetails->task_name,
+                                            "taskDescription" => $taskDetails->task_description,
+                                            "distanceRequired" => $taskDetails->task_distance,
+                                            "difficulty" => $taskDetails->task_difficulty,
+                                            "reward" => $taskDetails->task_reward,
+                                            "challengeMode" => $stringUtils->translateContent($taskDetails->is_challenge),
+                                            "distanceProgress" => $userTaskDetails->distance,
+                                            "userTaskActive" => $stringUtils->translateContent($userTaskDetails->is_active),
+                                            "userTaskChallenge" => $stringUtils->translateContent($userTaskDetails->is_challenge),
+                                            "userTaskExpired" => $stringUtils->translateContent($userTaskDetails->is_expired),
+                                            "userTaskCompleted" => $stringUtils->translateContent($userTaskDetails->is_completed),
+                                            "userTaskRedeemed" => $stringUtils->translateContent($userTaskDetails->is_redeemed),
+                                            "userTaskArchive" => $stringUtils->translateContent($userTaskDetails->is_archive),
+                                        )
+                                    ),
+                                    JSON_PRETTY_PRINT
+                                );
+                            }
                         }
+                        
                     }
                 }
                 break;
             case "updateBtn":
-                if ($taskDetails = $userTask->getData("readActiveTask", $response->uuid, 0)) {
-                    $distanceAccumulated = ($taskDetails->distance + $response->distance);
+                if ($userTaskDetails = $userTask->getData("readActiveTask", $response->uuid, 0)) {
+                    $taskDetails = $task->getData($userTaskDetails->task_id);
+                    $distanceAccumulated = ($userTaskDetails->distance + $response->distance);
                     if ($userTask->updateData("updateTask", $response->uuid, 0, $distanceAccumulated)) {
+                        if($distanceAccumulated >= $taskDetails->task_distance) {
+                            $userTask->updateData("completeTask", $response->uuid, 0, 0);
+                        }
+
                         echo json_encode(array(
                             "status" => "success",
                             "message" => "Task distance updated successfully"
