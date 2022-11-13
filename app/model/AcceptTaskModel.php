@@ -53,6 +53,18 @@ class AcceptTaskModel
 
                 return $this->db->find();
                 break;
+            case "readInProgressTask":
+                $this->db->query("SELECT * FROM $this->table WHERE `user_uuid` = :id AND `is_completed` = 0");
+                $this->db->bind(":id", $id);
+
+                return $this->db->findAll();
+                break;
+            case "readCompletedTask":
+                $this->db->query("SELECT * FROM $this->table WHERE `user_uuid` = :id AND `is_completed` = 1");
+                $this->db->bind(":id", $id);
+
+                return $this->db->findAll();
+                break;
         }
     }
 
