@@ -67,20 +67,24 @@ class AcceptTaskModel
     {
         switch ($action) {
             case "updateTask":
-                $this->db->query("UPDATE $this->table SET `distance` = :distance WHERE `user_uuid` = :user_uuid AND `is_active` = 0");
+                $this->db->query("UPDATE $this->table SET `distance` = :distance WHERE `user_uuid` = :user_uuid AND `is_active` = 1");
                 $this->db->bind(":user_uuid", $uuid);
                 $this->db->bind(":distance", $distance);
 
                 return $this->db->execute();
                 break;
             case "updateOldTask":
-                $this->db->query("UPDATE $this->table SET `is_active` = 0, `is_archive` = 1 WHERE `user_uuid` = :user_uuid AND `is_active` = 0");
+                $this->db->query("UPDATE $this->table SET `is_active` = 0, `is_archive` = 1 WHERE `user_uuid` = :user_uuid AND `is_active` = 1");
                 $this->db->bind(":user_uuid", $uuid);
 
                 return $this->db->execute();
                 break;
             case "updateNewTask":
+                $this->db->query("UPDATE $this->table SET `is_active` = 1, `is_archive` = 0 WHERE `user_uuid` = :user_uuid AND `task_id` = :task_id AND `is_active` = 0");
+                $this->db->bind(":user_uuid", $uuid);
+                $this->db->bind(":task_id", $task_id);
 
+                return $this->db->execute();
                 break;
         }
     }

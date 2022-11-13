@@ -28,13 +28,16 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 } else {
                     if ($userTask->getData("readInactiveTask", $response->uuid, $response->id)) {
                         if ($userTask->updateData("updateOldTask", $response->uuid, $response->id, 0)) {
-                            echo json_encode(
-                                array(
-                                    "status" => "Success",
-                                    "message" => "Successfully switched to old task!"
-                                ),
-                                JSON_PRETTY_PRINT
-                            );
+                            if ($userTask->updateData("updateNewTask", $response->uuid, $response->id, 0)) {
+                                echo json_encode(
+                                    array(
+                                        "status" => "Success",
+                                        "message" => "Successfully switched to old task!"
+                                    ),
+                                    JSON_PRETTY_PRINT
+                                );
+                            }
+                            
                         }
                     } else {
                         if ($userTask->saveData($response->uuid, $response->id)) {
