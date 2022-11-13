@@ -82,7 +82,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                     JSON_PRETTY_PRINT
                 );
             }
-        } else if (isset($_GET['task_id']) == "all") {
+        } else if ($_GET['task_id'] == "all") {
             $taskDetails = $task->getAllData();
             $array = array();
             foreach ($taskDetails as $key => $data) {
@@ -101,7 +101,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 $array,
                 JSON_PRETTY_PRINT
             );
-        } else if (isset($_GET['task_id']) == "active" && $userTaskDetails = $userTask->getData("readActiveTask", $response->uuid, 0)) {
+        } else if ($_GET['task_id'] == "active" && $userTaskDetails = $userTask->getData("readActiveTask", $_GET['uuid'], 0)) {
             $taskDetails = $task->getData($userTaskDetails->task_id);
             echo json_encode(
                 array(
@@ -113,7 +113,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                     "challengeMode" => $stringUtils->translateContent($taskDetails->is_challenge),
                     "distanceProgress" => $userTaskDetails->distance,
                     "userTaskActive" => $stringUtils->translateContent($userTaskDetails->is_active),
-                    "userTaskChallenge" => $stringUtils->translateContent($userTaskDetails->is_Challenge),
+                    "userTaskChallenge" => $stringUtils->translateContent($userTaskDetails->is_challenge),
                     "userTaskExpired" => $stringUtils->translateContent($userTaskDetails->is_expired),
                     "userTaskCompleted" => $stringUtils->translateContent($userTaskDetails->is_completed),
                     "userTaskRedeemed" => $stringUtils->translateContent($userTaskDetails->is_redeemed),

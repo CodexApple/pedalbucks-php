@@ -13,7 +13,7 @@ class AcceptTaskModel
         $this->db = new DatabaseManager();
     }
 
-    public function create($user_id, $task_id, $distance = 0, $active = 0, $challenge = 1, $expired = 1, $complete = 1, $redeemed = 1, $archive = 1)
+    public function create($user_id, $task_id, $distance = 0, $active = 1, $challenge = 0, $expired = 0, $complete = 0, $redeemed = 0, $archive = 0)
     {
         $this->db->query("INSERT INTO $this->table (`user_uuid`, `task_id`, `distance`, `is_active`, `is_challenge`, `is_expired`, `is_completed`, `is_redeemed`, `is_archive`)
             VALUES(:uid, :tid, :distance, :active, :challenge, :expired, :complete, :redeemed, :archive)");
