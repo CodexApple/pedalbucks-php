@@ -18,7 +18,7 @@ class TaskController
         $reward = isset($_POST['reward']) ? $_POST['reward'] : null;
         $challenge = isset($_POST['isChallenge']) ? $_POST['isChallenge'] : null;
 
-        return $this->var->create($name, $desc, $distance, $reward, $challenge, $expired = 1, $archive = 1);
+        return $this->var->create($name, $desc, $distance, $reward, $challenge, $expired = 0, $archive = 0);
     }
 
     public function getData($id)

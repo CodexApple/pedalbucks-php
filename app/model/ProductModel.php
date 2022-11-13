@@ -13,7 +13,7 @@ class ProductModel
         $this->db = new DatabaseManager();
     }
 
-    public function create($bid = 1, $cid = 1, $name, $desc, $price = 0, $archive = 1, $discount = 0)
+    public function create($bid = 1, $cid = 1, $name, $desc, $price = 0, $archive = 0, $discount = 0)
     {
         $this->db->query("INSERT INTO $this->table (`brand_id`, `category_id`, `name` , `description`, `price`, `is_archive`, `is_discount`)
             VALUES (:bid, :cid, :name, :desc, :price, :archive, :discount)");

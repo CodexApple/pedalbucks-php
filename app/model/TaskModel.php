@@ -13,7 +13,7 @@ class TaskModel
         $this->db = new DatabaseManager();
     }
 
-    public function create($name, $desc, $distance = 0, $reward = 0, $challenge = 1, $expired = 1, $archive = 1)
+    public function create($name, $desc, $distance = 0, $reward = 0, $challenge = 0, $expired = 0, $archive = 0)
     {
         $this->db->query("INSERT INTO $this->table (`task_name`, `task_description`, `task_distance`, `task_reward`, `is_challenge`, `is_expired`, `is_archive`)
             VALUES (:name, :desc, :distance, :reward, :challenge, :expired, :archive)");

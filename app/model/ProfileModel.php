@@ -14,7 +14,7 @@ class ProfileModel extends DatabaseManager
         $this->db = new DatabaseManager();
     }
 
-    public function create($uid, $fname, $mname, $lname, $telephone, $cellphone, $address, $birthday, $type, $distance, $height, $weight, $calories, $archive = 1)
+    public function create($uid, $fname, $mname, $lname, $telephone, $cellphone, $address, $birthday, $type, $distance, $height, $weight, $calories, $archive = 0)
     {
         $this->db->query("INSERT INTO $this->table (`user_uuid`, `firstname`, `middlename`, `lastname`, `telephone`, `cellphone`, `address`, `birthday`, `type_choice`, `distance_goal`, `height`, `weight`, `calories`, `is_archive`)
             VALUES (:uid, :fname, :mname, :lname, :telephone, :cellphone, :address, :birthday, :type, :distance, :height, :weight, :calories, :archive)");

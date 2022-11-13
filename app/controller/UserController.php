@@ -26,9 +26,9 @@ class UserController
 
         $datejoin = $this->date->format("Y-m-d H:i:s");
 
-        $firstJoin = 1;
-        $archive = 1;
-        $banned = 1;
+        $firstJoin = 0;
+        $archive = 0;
+        $banned = 0;
 
         return $this->var->create($uuid, $username, $email, $hashPassword, $oldPassword, $datejoin, $firstJoin, $archive, $banned);
     }

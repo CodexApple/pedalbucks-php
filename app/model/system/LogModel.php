@@ -13,7 +13,7 @@ class LogModel
         $this->db = new DatabaseManager();
     }
 
-    public function create($uuid, $type, $name, $desc, $date, $time, $read = 1, $archive = 1)
+    public function create($uuid, $type, $name, $desc, $date, $time, $read = 0, $archive = 0)
     {
         $this->db->query("INSERT INTO $this->table (`user_uuid`, `log_type`, `log_name`, `log_description`, `log_date`, `log_time`, `is_read`, `is_archive`)
             VALUES (:uuid, :type, :name, :desc, :date, :time, :read, :archive)");

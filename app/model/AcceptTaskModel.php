@@ -31,12 +31,29 @@ class AcceptTaskModel
         return $this->db->execute();
     }
 
-    public function read($id)
+    public function read($action, $id, $tid)
     {
-        $this->db->query("SELECT * FROM $this->table WHERE `user_uuid` = :id");
-        $this->db->bind(":id", $id);
+        switch ($action) {
+            case "readAllTask":
+                $this->db->query("SELECT * FROM $this->table WHERE `user_uuid` = :id");
+                $this->db->bind(":id", $id);
 
-        return $this->db->find();
+                return $this->db->find();
+                break;
+            case "readActiveTask":
+                $this->db->query("SELECT * FROM $this->table WHERE `user_uuid` = :id AND `is_active` = 1");
+                $this->db->bind(":id", $id);
+
+                return $this->db->find();
+                break;
+            case "readInactiveTask":
+                $this->db->query("SELECT * FROM $this->table WHERE `user_uuid` = :id AND `task_id` = :tid AND `is_active` = 0");
+                $this->db->bind(":id", $id);
+                $this->db->bind(":tid", $tid);
+
+                return $this->db->find();
+                break;
+        }
     }
 
     public function readAll()
@@ -57,7 +74,7 @@ class AcceptTaskModel
                 return $this->db->execute();
                 break;
             case "updateOldTask":
-                $this->db->query("UPDATE $this->table SET `is_active` = 1, `is_archive` = 0 WHERE `user_uuid` = :user_uuid AND `is_active` = 0");
+                $this->db->query("UPDATE $this->table SET `is_active` = 0, `is_archive` = 1 WHERE `user_uuid` = :user_uuid AND `is_active` = 0");
                 $this->db->bind(":user_uuid", $uuid);
 
                 return $this->db->execute();

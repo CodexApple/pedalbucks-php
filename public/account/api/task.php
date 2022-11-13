@@ -10,8 +10,11 @@ switch ($_SERVER['REQUEST_METHOD']) {
     case "POST":
         switch ($response->submit) {
             case "acceptBtn":
-                if (empty($userTask->getData($response->uuid))) {
-                    if ($response->id != null) {
+                if (empty($userTask->getData("readActiveTask", $response->uuid, 0))) {
+                    if (!empty($response->id)) {
+                        /*
+                        * Save user task when there are no existing tasks, and response id is present
+                        */
                         if ($userTask->saveData($response->uuid, $response->id)) {
                             echo json_encode(
                                 array(
@@ -22,17 +25,23 @@ switch ($_SERVER['REQUEST_METHOD']) {
                             );
                         }
                     }
-
-                    return;
-                }
-
-                if ($userTask->updateData("updateOldTask", $response->uuid, $response->id, 0)) {
-                    if ($response->id != null) {
+                } else {
+                    if ($userTask->getData("readInactiveTask", $response->uuid, $response->id)) {
+                        if ($userTask->updateData("updateOldTask", $response->uuid, $response->id, 0)) {
+                            echo json_encode(
+                                array(
+                                    "status" => "Success",
+                                    "message" => "Successfully switched to old task!"
+                                ),
+                                JSON_PRETTY_PRINT
+                            );
+                        }
+                    } else {
                         if ($userTask->saveData($response->uuid, $response->id)) {
                             echo json_encode(
                                 array(
                                     "status" => "Success",
-                                    "message" => "Successfully accepted new task!"
+                                    "message" => "Successfully accepted the Task!"
                                 ),
                                 JSON_PRETTY_PRINT
                             );
@@ -41,7 +50,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 }
                 break;
             case "updateBtn":
-                if ($taskDetails = $userTask->getData($response->uuid)) {
+                if ($taskDetails = $userTask->getData("readActiveTask", $response->uuid, 0)) {
                     $distanceAccumulated = ($taskDetails->distance + $response->distance);
                     if ($userTask->updateData("updateTask", $response->uuid, 0, $distanceAccumulated)) {
                         echo json_encode(array(
@@ -60,7 +69,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         break;
     case "GET":
         if (isset($_GET['task_id']) && $taskDetails = $task->getData($_GET['task_id'])) {
-            if ($taskDetails->is_expired == 1) {
+            if ($taskDetails->is_expired == 0) {
                 echo json_encode(
                     array(
                         "taskID" => $taskDetails->id,
@@ -73,11 +82,11 @@ switch ($_SERVER['REQUEST_METHOD']) {
                     JSON_PRETTY_PRINT
                 );
             }
-        } else {
+        } else if (isset($_GET['task_id']) == "all") {
             $taskDetails = $task->getAllData();
             $array = array();
             foreach ($taskDetails as $key => $data) {
-                if ($data->is_expired == 1) {
+                if ($data->is_expired == 0) {
                     $array[] = array(
                         "taskID" => $data->id,
                         "taskName" => $data->task_name,
@@ -90,6 +99,34 @@ switch ($_SERVER['REQUEST_METHOD']) {
             }
             echo json_encode(
                 $array,
+                JSON_PRETTY_PRINT
+            );
+        } else if (isset($_GET['task_id']) == "active" && $userTaskDetails = $userTask->getData("readActiveTask", $response->uuid, 0)) {
+            $taskDetails = $task->getData($userTaskDetails->task_id);
+            echo json_encode(
+                array(
+                    "taskID" => $taskDetails->id,
+                    "taskName" => $taskDetails->task_name,
+                    "taskDescription" => $taskDetails->task_description,
+                    "distanceRequired" => $taskDetails->task_distance,
+                    "reward" => $taskDetails->task_reward,
+                    "challengeMode" => $stringUtils->translateContent($taskDetails->is_challenge),
+                    "distanceProgress" => $userTaskDetails->distance,
+                    "userTaskActive" => $stringUtils->translateContent($userTaskDetails->is_active),
+                    "userTaskChallenge" => $stringUtils->translateContent($userTaskDetails->is_Challenge),
+                    "userTaskExpired" => $stringUtils->translateContent($userTaskDetails->is_expired),
+                    "userTaskCompleted" => $stringUtils->translateContent($userTaskDetails->is_completed),
+                    "userTaskRedeemed" => $stringUtils->translateContent($userTaskDetails->is_redeemed),
+                    "userTaskArchive" => $stringUtils->translateContent($userTaskDetails->is_archive),
+                ),
+                JSON_PRETTY_PRINT
+            );
+        } else {
+            echo json_encode(
+                array(
+                    "status" => "Error",
+                    "message" => "Invalid action"
+                ),
                 JSON_PRETTY_PRINT
             );
         }

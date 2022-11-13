@@ -15,7 +15,7 @@ class StringUtils
 
     public function translateContent($id)
     {
-        return ($id != 1 ? "Yes" : "No");
+        return ($id != 0 ? "Yes" : "No");
     }
 
     // $icon = error, warning, info, success
@@ -45,7 +45,7 @@ class StringUtils
 
     public function translateTask($int)
     {
-        return $int == 1 ? "NO" : ($int == 0 ? "YES" : null);
+        return $int == 0 ? "NO" : ($int == 1 ? "YES" : null);
     }
 
     public function coloredTask($int)

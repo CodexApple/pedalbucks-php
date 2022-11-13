@@ -58,9 +58,22 @@ window.addEventListener('DOMContentLoaded', event => {
 
 });
 
-// const jsonQuery = JSON.stringify({ username: "MilkyTune2", email: "milkytune2@elk.support.gg", password: "root", submit: "registerBtn" });
+// const jsonQuery = JSON.stringify({ 
+//     uuid: "7c8f-2341-e13e-4009", 
+//     firstname: "Kristofer Martin", 
+//     lastname: "Pillarina", 
+//     cellphone: "09281642285",
+//     address: "Somewhere here",
+//     birthday: "11/14/2000",
+//     type: 1,
+//     distance: 1000,
+//     height: 1000,
+//     weight: 1000,
+//     calories: 1000,
+// });
+
 // (async () => {
-//     const rawResponse = await fetch('http://localhost/account/api/register', {
+//     const rawResponse = await fetch('http://localhost/account/api/profile', {
 //         method: 'POST',
 //         headers: {
 //             'Content-Type': 'application/json'

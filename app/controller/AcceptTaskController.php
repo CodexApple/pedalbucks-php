@@ -15,9 +15,9 @@ class AcceptTaskController
         return $this->var->create($user_id, $task_id);
     }
 
-    public function getData($id)
+    public function getData($action, $id, $tid)
     {
-        return $this->var->read($id);
+        return $this->var->read($action, $id, $tid);
     }
 
     public function getAllData()
