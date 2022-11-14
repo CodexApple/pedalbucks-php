@@ -15,10 +15,11 @@ class TaskController
         $name = isset($_POST['name']) ? $_POST['name'] : null;
         $desc = isset($_POST['description']) ? $_POST['description'] : null;;
         $distance = isset($_POST['taskDistance']) ? $_POST['taskDistance'] : null;
+        $difficulty = isset($_POST['taskDifficulty']) ? $_POST['taskDifficulty'] : null;
         $reward = isset($_POST['reward']) ? $_POST['reward'] : null;
         $challenge = isset($_POST['isChallenge']) ? $_POST['isChallenge'] : null;
 
-        return $this->var->create($name, $desc, $distance, $reward, $challenge, $expired = 0, $archive = 0);
+        return $this->var->create($name, $desc, $distance, $difficulty, $reward, $challenge, $expired = 0, $archive = 0);
     }
 
     public function getData($id)
