@@ -148,7 +148,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                     JSON_PRETTY_PRINT
                 );
             }
-        } else if ($_GET['task_id'] == "all") {
+        } else if (isset($_GET['task_id']) && $_GET['task_id'] == "all") {
             $taskDetails = $task->getAllData();
             $array = array();
             foreach ($taskDetails as $key => $data) {
