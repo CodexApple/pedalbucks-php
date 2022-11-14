@@ -1,312 +1,372 @@
-CREATE DATABASE  IF NOT EXISTS `beep_crms` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `beep_crms`;
--- MySQL dump 10.13  Distrib 8.0.30, for Win64 (x86_64)
+-- phpMyAdmin SQL Dump
+-- version 5.1.1
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost    Database: beep_crms
--- ------------------------------------------------------
--- Server version	8.0.30
+-- Host: 127.0.0.1
+-- Generation Time: Nov 14, 2022 at 07:13 AM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.1.1
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `beep_crms`
+--
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `tbl_accepted_task`
 --
 
-DROP TABLE IF EXISTS `tbl_accepted_task`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tbl_accepted_task` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_uuid` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `task_id` int DEFAULT NULL,
-  `distance` int DEFAULT NULL,
-  `is_active` int DEFAULT NULL,
-  `is_challenge` int DEFAULT NULL,
-  `is_expired` int DEFAULT NULL,
-  `is_completed` int DEFAULT NULL,
-  `is_redeemed` int DEFAULT NULL,
-  `is_archive` int DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `id` int(11) NOT NULL,
+  `user_uuid` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `task_id` int(11) DEFAULT NULL,
+  `distance` int(11) DEFAULT NULL,
+  `is_active` int(11) DEFAULT NULL,
+  `is_challenge` int(11) DEFAULT NULL,
+  `is_expired` int(11) DEFAULT NULL,
+  `is_completed` int(11) DEFAULT NULL,
+  `is_redeemed` int(11) DEFAULT NULL,
+  `is_archive` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `tbl_accepted_task`
 --
 
-LOCK TABLES `tbl_accepted_task` WRITE;
-/*!40000 ALTER TABLE `tbl_accepted_task` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tbl_accepted_task` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `tbl_accepted_task` (`id`, `user_uuid`, `task_id`, `distance`, `is_active`, `is_challenge`, `is_expired`, `is_completed`, `is_redeemed`, `is_archive`) VALUES
+(1, 'b119-857c-de40-4adf', 1, 18, 0, 0, 0, 1, 0, 1),
+(2, 'b119-857c-de40-4adf', 2, 2, 0, 0, 0, 0, 0, 1),
+(5, 'b119-857c-de40-4adf', 3, 60, 1, 0, 0, 1, 0, 0),
+(6, 'c1e4-6bd9-7fc2-4768', 1, 15, 0, 0, 0, 1, 0, 1),
+(7, 'c1e4-6bd9-7fc2-4768', 2, 0, 1, 0, 0, 0, 0, 0),
+(8, '5f21-6549-e2cf-4cfe', 1, 0, 1, 0, 0, 0, 0, 0);
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `tbl_brand`
 --
 
-DROP TABLE IF EXISTS `tbl_brand`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tbl_brand` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `id` int(11) NOT NULL,
+  `name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbl_brand`
 --
 
-LOCK TABLES `tbl_brand` WRITE;
-/*!40000 ALTER TABLE `tbl_brand` DISABLE KEYS */;
-INSERT INTO `tbl_brand` VALUES (1,'No Brand');
-/*!40000 ALTER TABLE `tbl_brand` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `tbl_brand` (`id`, `name`) VALUES
+(1, 'No Brand');
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `tbl_category`
 --
 
-DROP TABLE IF EXISTS `tbl_category`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tbl_category` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `id` int(11) NOT NULL,
+  `name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbl_category`
 --
 
-LOCK TABLES `tbl_category` WRITE;
-/*!40000 ALTER TABLE `tbl_category` DISABLE KEYS */;
-INSERT INTO `tbl_category` VALUES (1,'No Category');
-/*!40000 ALTER TABLE `tbl_category` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `tbl_category` (`id`, `name`) VALUES
+(1, 'No Category');
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `tbl_cyclist`
 --
 
-DROP TABLE IF EXISTS `tbl_cyclist`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tbl_cyclist` (
-  `id` int NOT NULL,
-  `user_uuid` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `id` int(11) NOT NULL,
+  `user_uuid` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `tbl_cyclist`
---
-
-LOCK TABLES `tbl_cyclist` WRITE;
-/*!40000 ALTER TABLE `tbl_cyclist` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tbl_cyclist` ENABLE KEYS */;
-UNLOCK TABLES;
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `tbl_log`
 --
 
-DROP TABLE IF EXISTS `tbl_log`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tbl_log` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_uuid` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `log_type` int DEFAULT NULL,
-  `log_name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `log_description` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `log_date` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `log_time` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `is_read` int DEFAULT NULL,
-  `is_archive` int DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `id` int(11) NOT NULL,
+  `user_uuid` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `log_type` int(11) DEFAULT NULL,
+  `log_name` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `log_description` varchar(1024) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `log_date` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `log_time` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `is_read` int(11) DEFAULT NULL,
+  `is_archive` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `tbl_log`
---
-
-LOCK TABLES `tbl_log` WRITE;
-/*!40000 ALTER TABLE `tbl_log` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tbl_log` ENABLE KEYS */;
-UNLOCK TABLES;
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `tbl_product`
 --
 
-DROP TABLE IF EXISTS `tbl_product`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tbl_product` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `brand_id` int DEFAULT NULL,
-  `category_id` int DEFAULT NULL,
-  `name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `price` int DEFAULT NULL,
-  `is_archive` int DEFAULT NULL,
-  `is_discount` int DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `id` int(11) NOT NULL,
+  `brand_id` int(11) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `name` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(1024) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `price` int(11) DEFAULT NULL,
+  `is_archive` int(11) DEFAULT NULL,
+  `is_discount` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `tbl_product`
 --
 
-LOCK TABLES `tbl_product` WRITE;
-/*!40000 ALTER TABLE `tbl_product` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tbl_product` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `tbl_product` (`id`, `brand_id`, `category_id`, `name`, `description`, `price`, `is_archive`, `is_discount`) VALUES
+(1, 1, 1, 'Julie\'s Bakeshop Ensaimada', 'Coupon for 1 Julie\'s Bakeshop Ensaimada.', 10, 0, 0);
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `tbl_profile`
 --
 
-DROP TABLE IF EXISTS `tbl_profile`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tbl_profile` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_uuid` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `firstname` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `middlename` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `lastname` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `telephone` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cellphone` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `birthday` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `type_choice` int DEFAULT NULL,
-  `distance_goal` int DEFAULT NULL,
-  `height` int DEFAULT NULL,
-  `weight` int DEFAULT NULL,
-  `calories` int DEFAULT NULL,
-  `is_archive` int DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `id` int(11) NOT NULL,
+  `user_uuid` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `firstname` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `middlename` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lastname` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `telephone` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cellphone` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `birthday` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type_choice` int(11) DEFAULT NULL,
+  `distance_goal` int(11) DEFAULT NULL,
+  `height` int(11) DEFAULT NULL,
+  `weight` int(11) DEFAULT NULL,
+  `calories` int(11) DEFAULT NULL,
+  `is_archive` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `tbl_profile`
 --
 
-LOCK TABLES `tbl_profile` WRITE;
-/*!40000 ALTER TABLE `tbl_profile` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tbl_profile` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `tbl_profile` (`id`, `user_uuid`, `firstname`, `middlename`, `lastname`, `telephone`, `cellphone`, `address`, `birthday`, `type_choice`, `distance_goal`, `height`, `weight`, `calories`, `is_archive`) VALUES
+(1, 'b119-857c-de40-4adf', 'Pedal', '', 'Bucks', '', '09154217926', 'somewhere', '2022-11-13', 3, 1, 200, 200, 1000, 0),
+(2, 'c1e4-6bd9-7fc2-4768', 'Kirk', '', 'Espina', '', '09154217926', 'somewhere', '2022-11-14', 3, 1, 170, 60, 100, 0),
+(3, '5f21-6549-e2cf-4cfe', 'Paul', '', 'Paul', '', '09154217926', 'somewhere', '2022-11-14', 1, 5, 180, 180, 180, 0);
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `tbl_statistic`
 --
 
-DROP TABLE IF EXISTS `tbl_statistic`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tbl_statistic` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_uuid` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `speed` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `distance` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `id` int(11) NOT NULL,
+  `user_uuid` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `speed` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `distance` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `tbl_statistic`
---
-
-LOCK TABLES `tbl_statistic` WRITE;
-/*!40000 ALTER TABLE `tbl_statistic` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tbl_statistic` ENABLE KEYS */;
-UNLOCK TABLES;
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `tbl_task`
 --
 
-DROP TABLE IF EXISTS `tbl_task`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tbl_task` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `task_name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `task_description` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `task_distance` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `task_reward` int DEFAULT NULL,
-  `is_challenge` int DEFAULT NULL,
-  `is_expired` int DEFAULT NULL,
-  `is_archive` int DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `id` int(11) NOT NULL,
+  `task_name` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `task_description` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `task_distance` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `task_difficulty` int(45) DEFAULT NULL,
+  `task_reward` int(11) DEFAULT NULL,
+  `is_challenge` int(11) DEFAULT NULL,
+  `is_expired` int(11) DEFAULT NULL,
+  `is_archive` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `tbl_task`
 --
 
-LOCK TABLES `tbl_task` WRITE;
-/*!40000 ALTER TABLE `tbl_task` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tbl_task` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `tbl_task` (`id`, `task_name`, `task_description`, `task_distance`, `task_difficulty`, `task_reward`, `is_challenge`, `is_expired`, `is_archive`) VALUES
+(1, 'Cycle for 15 meters', 'Cycle for 15 meters to receive a reward.', '15', 1, 100, 0, 0, 0),
+(2, 'Cycle for 20 meters', 'Cycle for 20 meters to receive a reward.', '20', 2, 100, 0, 0, 0),
+(3, 'Cycle for 30 meters', 'Cycle for 30 meters to receive a reward.', '30', 3, 300, 0, 0, 0);
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `tbl_user`
 --
 
-DROP TABLE IF EXISTS `tbl_user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tbl_user` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `uuid` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `username` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `old_password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `datejoined` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `usertype` int DEFAULT NULL,
-  `is_firstjoin` int DEFAULT NULL,
-  `is_archive` int DEFAULT NULL,
-  `is_banned` int DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `id` int(11) NOT NULL,
+  `uuid` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `username` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `old_password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `datejoined` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `usertype` int(11) DEFAULT NULL,
+  `is_firstjoin` int(11) DEFAULT NULL,
+  `is_archive` int(11) DEFAULT NULL,
+  `is_banned` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `tbl_user`
 --
 
-LOCK TABLES `tbl_user` WRITE;
-/*!40000 ALTER TABLE `tbl_user` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tbl_user` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+INSERT INTO `tbl_user` (`id`, `uuid`, `username`, `email`, `password`, `old_password`, `datejoined`, `usertype`, `is_firstjoin`, `is_archive`, `is_banned`) VALUES
+(1, 'b119-857c-de40-4adf', 'pedalbucks', 'pedalbucks@pedalbucks.com', '$2y$10$GGfrshv/Zbj4r1xmc6L0TO1TAKRvFu.ZZCcXytkExD17ncdwZIzze', '$2y$10$GGfrshv/Zbj4r1xmc6L0TO1TAKRvFu.ZZCcXytkExD17ncdwZIzze', '2022-11-13 14:43:10', NULL, 0, 0, 0),
+(2, 'dda7-f24b-b221-49b2', 'paulkirk', 'paulkirk@paulkirk.com', '$2y$10$HNLUfBIl41aGYwFRPqsMaOHvJkMaOi3dw9dOl22hYydfL67LBer5C', '$2y$10$HNLUfBIl41aGYwFRPqsMaOHvJkMaOi3dw9dOl22hYydfL67LBer5C', '2022-11-13 20:13:47', NULL, 0, 0, 0),
+(3, 'c1e4-6bd9-7fc2-4768', 'kirkkirk', 'kirkkirk@kirk.com', '$2y$10$YHcZuh4BOoTW.vM/SdOfV.HqcV8AYNzqHQrLf2thG/9AuAi/Crin.', '$2y$10$YHcZuh4BOoTW.vM/SdOfV.HqcV8AYNzqHQrLf2thG/9AuAi/Crin.', '2022-11-13 20:19:48', NULL, 0, 0, 0),
+(4, '5f21-6549-e2cf-4cfe', 'paulpaul', 'paulpaul@paul.com', '$2y$10$stkzT2VAAWA/9mavahDRfeW5L7LJymzsjYoUAdsJUJBK.uO41BK3C', '$2y$10$stkzT2VAAWA/9mavahDRfeW5L7LJymzsjYoUAdsJUJBK.uO41BK3C', '2022-11-13 20:38:15', NULL, 0, 0, 0);
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `tbl_accepted_task`
+--
+ALTER TABLE `tbl_accepted_task`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_brand`
+--
+ALTER TABLE `tbl_brand`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_category`
+--
+ALTER TABLE `tbl_category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_cyclist`
+--
+ALTER TABLE `tbl_cyclist`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_log`
+--
+ALTER TABLE `tbl_log`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_product`
+--
+ALTER TABLE `tbl_product`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_profile`
+--
+ALTER TABLE `tbl_profile`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_statistic`
+--
+ALTER TABLE `tbl_statistic`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_task`
+--
+ALTER TABLE `tbl_task`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_user`
+--
+ALTER TABLE `tbl_user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `tbl_accepted_task`
+--
+ALTER TABLE `tbl_accepted_task`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `tbl_brand`
+--
+ALTER TABLE `tbl_brand`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tbl_category`
+--
+ALTER TABLE `tbl_category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tbl_log`
+--
+ALTER TABLE `tbl_log`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_product`
+--
+ALTER TABLE `tbl_product`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tbl_profile`
+--
+ALTER TABLE `tbl_profile`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tbl_statistic`
+--
+ALTER TABLE `tbl_statistic`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_task`
+--
+ALTER TABLE `tbl_task`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tbl_user`
+--
+ALTER TABLE `tbl_user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2022-11-13 21:30:59
