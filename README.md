@@ -7,8 +7,8 @@ and PHP as its Back-End.
 
 Progress:
 
-- Website Development: 50%
-- Mobile Development: %
+- Website Development: 80%
+- Mobile Development: ?%
 
 How to Use and Install:
 
