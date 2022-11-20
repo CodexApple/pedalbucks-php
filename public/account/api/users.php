@@ -1,9 +1,31 @@
 <?php
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/core/Core.php';
-header("Content-type: application/json");
+header("Content-Type: application/json");
+
+$rawData = file_get_contents("php://input");
+$response = json_decode($rawData);
 
 switch ($_SERVER['REQUEST_METHOD']) {
+    case "POST":
+        switch ($response->submit) {
+            case "updateBtn":
+                if (!empty($response->uuid)) {
+                    if ($user->updateData($response->uuid, $response->email, $response->password)) {
+                        echo json_encode(
+                            array(
+                                "status" => "Success",
+                                "message" => "User Information Updated!",
+                                "email" => $response->email,
+                                "password" => "Successfully changed Password!"
+                            ),
+                            JSON_PRETTY_PRINT
+                        );
+                    }
+                }
+                break;
+        }
+
     case "GET":
         if (isset($_GET['uuid']) && $userDetails = $user->getData($_GET['uuid'])) {
             echo json_encode(

@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `beep_crms` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `beep_crms`;
 -- MySQL dump 10.13  Distrib 8.0.30, for Win64 (x86_64)
 --
 -- Host: localhost    Database: beep_crms
@@ -97,26 +95,28 @@ INSERT INTO `tbl_category` VALUES (1,'No Category');
 UNLOCK TABLES;
 
 --
--- Table structure for table `tbl_cyclist`
+-- Table structure for table `tbl_economy`
 --
 
-DROP TABLE IF EXISTS `tbl_cyclist`;
+DROP TABLE IF EXISTS `tbl_economy`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tbl_cyclist` (
-  `id` int NOT NULL,
+CREATE TABLE `tbl_economy` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `user_uuid` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_points` int DEFAULT NULL,
+  `is_archive` int DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tbl_cyclist`
+-- Dumping data for table `tbl_economy`
 --
 
-LOCK TABLES `tbl_cyclist` WRITE;
-/*!40000 ALTER TABLE `tbl_cyclist` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tbl_cyclist` ENABLE KEYS */;
+LOCK TABLES `tbl_economy` WRITE;
+/*!40000 ALTER TABLE `tbl_economy` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbl_economy` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -137,7 +137,7 @@ CREATE TABLE `tbl_log` (
   `is_read` int DEFAULT NULL,
   `is_archive` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -146,6 +146,7 @@ CREATE TABLE `tbl_log` (
 
 LOCK TABLES `tbl_log` WRITE;
 /*!40000 ALTER TABLE `tbl_log` DISABLE KEYS */;
+INSERT INTO `tbl_log` VALUES (1,'bda0-ef3b-dfa5-4bca',0,'Created new Task','CodexApple created a new task, detailed link: pedalbucks.gq?taskid','2022-11-14','06:02:20',1,1),(2,'bda0-ef3b-dfa5-4bca',0,'Created new Task','CodexApple created a new task, detailed link: pedalbucks.gq?taskid','2022-11-17','06:26:48',1,1);
 /*!40000 ALTER TABLE `tbl_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -202,7 +203,7 @@ CREATE TABLE `tbl_profile` (
   `calories` int DEFAULT NULL,
   `is_archive` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -211,6 +212,7 @@ CREATE TABLE `tbl_profile` (
 
 LOCK TABLES `tbl_profile` WRITE;
 /*!40000 ALTER TABLE `tbl_profile` DISABLE KEYS */;
+INSERT INTO `tbl_profile` VALUES (1,'bda0-ef3b-dfa5-4bca','Kristofer Martin','Ramirez','Pillarina','123456789','09123456789','Sample Address','11/14/2000',1,1000,150,80,2000,0);
 /*!40000 ALTER TABLE `tbl_profile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -224,8 +226,9 @@ DROP TABLE IF EXISTS `tbl_statistic`;
 CREATE TABLE `tbl_statistic` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_uuid` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `speed` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `distance` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `speed` float DEFAULT NULL,
+  `distance` int DEFAULT NULL,
+  `calories` int DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -251,12 +254,13 @@ CREATE TABLE `tbl_task` (
   `task_name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `task_description` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `task_distance` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `task_difficulty` int DEFAULT NULL,
   `task_reward` int DEFAULT NULL,
   `is_challenge` int DEFAULT NULL,
   `is_expired` int DEFAULT NULL,
   `is_archive` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -265,6 +269,7 @@ CREATE TABLE `tbl_task` (
 
 LOCK TABLES `tbl_task` WRITE;
 /*!40000 ALTER TABLE `tbl_task` DISABLE KEYS */;
+INSERT INTO `tbl_task` VALUES (1,'Cycle for 20M','Cycle for 20 meters to receive a reward.','20',1,100,1,0,0),(2,'Cycle for 15M','Cycle for 15 meters to receive a reward.','15',1,100,1,0,0);
 /*!40000 ALTER TABLE `tbl_task` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -288,7 +293,7 @@ CREATE TABLE `tbl_user` (
   `is_archive` int DEFAULT NULL,
   `is_banned` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -297,6 +302,7 @@ CREATE TABLE `tbl_user` (
 
 LOCK TABLES `tbl_user` WRITE;
 /*!40000 ALTER TABLE `tbl_user` DISABLE KEYS */;
+INSERT INTO `tbl_user` VALUES (1,'bda0-ef3b-dfa5-4bca','CodexApple','codexapple@pedalbucks.cf','$2y$10$xhR3qDjVbwtiut2jWAyT4.qEJoHJs0JCqv938IXpO.yztGiYXm7Ji','$2y$10$xhR3qDjVbwtiut2jWAyT4.qEJoHJs0JCqv938IXpO.yztGiYXm7Ji','2022-11-14 05:56:31',1,0,0,0),(2,'2d16-a447-2eb2-4eef','testtester','tester@test.com','$2y$10$Y94wnj/B76n3g.UcwEyJq.ek4uR.W2K34QhKgY.H74ajucIKGGnXu','$2y$10$Y94wnj/B76n3g.UcwEyJq.ek4uR.W2K34QhKgY.H74ajucIKGGnXu','2022-11-20 11:05:03',1,0,0,0);
 /*!40000 ALTER TABLE `tbl_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -309,4 +315,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-13 21:30:59
+-- Dump completed on 2022-11-20 20:58:30

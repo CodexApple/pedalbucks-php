@@ -68,8 +68,10 @@ class UserController
         return $this->var->readAll();
     }
 
-    public function updateData()
+    public function updateData($user_id, $email, $password)
     {
+        $hashPassword = $this->auth->setPassword($password);
+        return $this->var->update($user_id, $email, $hashPassword);
     }
 
     public function deleteData($id)

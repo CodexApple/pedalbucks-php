@@ -28,8 +28,9 @@ class ProfileController
         return $this->var->readAll();
     }
 
-    public function updateData()
+    public function updateData($uuid, $address, $telephone, $cellphone, $type_choice, $distance_goal, $height, $weight, $calories)
     {
+        return $this->var->update($uuid, $address, $telephone, $cellphone, $type_choice, $distance_goal, $height, $weight, $calories);
     }
 
     public function deleteData($id)

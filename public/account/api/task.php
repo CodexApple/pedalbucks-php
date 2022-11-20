@@ -73,7 +73,6 @@ switch ($_SERVER['REQUEST_METHOD']) {
                                     JSON_PRETTY_PRINT
                                 );
                             }
-                            
                         }
                     } else {
                         if ($userTask->updateData("updateOldTask", $response->uuid, $response->id, 0)) {
@@ -105,7 +104,6 @@ switch ($_SERVER['REQUEST_METHOD']) {
                                 );
                             }
                         }
-                        
                     }
                 }
                 break;
@@ -114,10 +112,9 @@ switch ($_SERVER['REQUEST_METHOD']) {
                     $taskDetails = $task->getData($userTaskDetails->task_id);
                     $distanceAccumulated = ($userTaskDetails->distance + $response->distance);
                     if ($userTask->updateData("updateTask", $response->uuid, 0, $distanceAccumulated)) {
-                        if($distanceAccumulated >= $taskDetails->task_distance) {
+                        if ($distanceAccumulated >= $taskDetails->task_distance) {
                             $userTask->updateData("completeTask", $response->uuid, 0, 0);
                         }
-
                         echo json_encode(array(
                             "status" => "success",
                             "message" => "Task distance updated successfully"
@@ -191,7 +188,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
             );
         } else if ($_GET['task_id'] == "inprogress" && $userTasks = $userTask->getData("readInProgressTask", $_GET['uuid'], 0)) {
             $userTasksDetailed = array();
-            foreach($userTasks as $userTaskDetails) {
+            foreach ($userTasks as $userTaskDetails) {
                 $taskDetails = $task->getData($userTaskDetails->task_id);
                 array_push($userTasksDetailed, array(
                     "taskID" => $taskDetails->id,
@@ -213,7 +210,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
             echo json_encode($userTasksDetailed, JSON_PRETTY_PRINT);
         } else if ($_GET['task_id'] == "completed" && $userTasks = $userTask->getData("readCompletedTask", $_GET['uuid'], 0)) {
             $userTasksDetailed = array();
-            foreach($userTasks as $userTaskDetails) {
+            foreach ($userTasks as $userTaskDetails) {
                 $taskDetails = $task->getData($userTaskDetails->task_id);
                 array_push($userTasksDetailed, array(
                     "taskID" => $taskDetails->id,

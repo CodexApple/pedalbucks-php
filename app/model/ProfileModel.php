@@ -52,8 +52,23 @@ class ProfileModel extends DatabaseManager
         return $this->db->findAll();
     }
 
-    public function update()
+    public function update($uuid, $address, $telephone, $cellphone, $type_choice, $distance_goal, $height, $weight, $calories)
     {
+        $this->db->query("UPDATE $this->table SET `address` = :address, `telephone` = :telephone, 
+        `cellphone` = :cellphone, `type_choice` = :type_choice, `distance_goal` = :distance_goal,
+        `height` = :height, `weight` = :weight, `calories` = :calories WHERE `user_uuid` = :user_uuid");
+
+        $this->db->bind(":user_uuid", $uuid);
+        $this->db->bind(":address", $address);
+        $this->db->bind(":telephone", $telephone);
+        $this->db->bind(":cellphone", $cellphone);
+        $this->db->bind(":type_choice", $type_choice);
+        $this->db->bind(":distance_goal", $distance_goal);
+        $this->db->bind(":height", $height);
+        $this->db->bind(":weight", $weight);
+        $this->db->bind(":calories", $calories);
+
+        return $this->db->execute();
     }
 
     public function delete($id)

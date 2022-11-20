@@ -85,3 +85,23 @@ window.addEventListener('DOMContentLoaded', event => {
 //     console.log(content);
 
 // })();
+
+const jsonQuery = JSON.stringify({ 
+    uuid: "testtester", 
+    password: "password", 
+    submit: "loginBtn", 
+});
+
+(async () => {
+    const rawResponse = await fetch('http://localhost/account/api/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: jsonQuery
+    });
+
+    const content = await rawResponse.json();
+    console.log(content);
+
+})();

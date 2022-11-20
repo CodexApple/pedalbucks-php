@@ -50,7 +50,7 @@ class StringUtils
 
     public function coloredTask($int)
     {
-        return $int == 1 ? "danger" : ($int == 0 ? "success" : null);
+        return $int == 0 ? "danger" : ($int == 1 ? "success" : null);
     }
 
     public function getRequestMethod()

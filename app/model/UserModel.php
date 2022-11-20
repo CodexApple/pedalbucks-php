@@ -81,8 +81,14 @@ class UserModel extends DatabaseManager
         return $this->db->findAll();
     }
 
-    public function update()
+    public function update($user_id, $email, $password)
     {
+        $this->db->query("UPDATE $this->table SET `email` = :email, `password` = :password WHERE `uuid` = :uuid ");
+        $this->db->bind(":uuid", $user_id);
+        $this->db->bind(":email", $email);
+        $this->db->bind(":password", $password);
+
+        return $this->db->execute();
     }
 
     public function delete($id)

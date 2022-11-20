@@ -40,8 +40,13 @@ class EconomyModel
         return $this->db->findAll();
     }
 
-    public function update()
+    public function update($user_id, $points)
     {
+        $this->db->query("UPDATE $this->table SET `user_points` = :points WHERE `user_uuid` = :user_id");
+        $this->db->bind(":user_id", $user_id);
+        $this->db->bind(":points", $points);
+
+        return $this->db->execute();
     }
 
     public function delete($id)

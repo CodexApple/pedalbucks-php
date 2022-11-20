@@ -10,9 +10,9 @@ class EconomyController
         $this->var = new EconomyModel();
     }
 
-    public function saveData()
+    public function saveData($user_id, $points = 0, $archive = 1)
     {
-        return $this->var->create();
+        return $this->var->create($user_id, $points = 0, $archive = 1);
     }
 
     public function getData($id)
@@ -25,8 +25,9 @@ class EconomyController
         return $this->var->readAll();
     }
 
-    public function updateData()
+    public function updateData($user_id, $points)
     {
+        return $this->var->update($user_id, $points);
     }
 
     public function deleteData($id)

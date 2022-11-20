@@ -14,6 +14,7 @@ require_once dirname(__DIR__) . '/core/database/Database.php';
 require_once dirname(__DIR__) . '/app/controller/system/AuthController.php';
 require_once dirname(__DIR__) . '/app/controller/system/LogController.php';
 require_once dirname(__DIR__) . '/app/controller/AcceptTaskController.php';
+require_once dirname(__DIR__) . '/app/controller/EconomyController.php';
 require_once dirname(__DIR__) . '/app/controller/ProductController.php';
 require_once dirname(__DIR__) . '/app/controller/ProfileController.php';
 require_once dirname(__DIR__) . '/app/controller/TaskController.php';
@@ -22,6 +23,7 @@ require_once dirname(__DIR__) . '/app/controller/UserController.php';
 // Models
 require_once dirname(__DIR__) . '/app/model/system/LogModel.php';
 require_once dirname(__DIR__) . '/app/model/AcceptTaskModel.php';
+require_once dirname(__DIR__) . '/app/model/EconomyModel.php';
 require_once dirname(__DIR__) . '/app/model/ProductModel.php';
 require_once dirname(__DIR__) . '/app/model/ProfileModel.php';
 require_once dirname(__DIR__) . '/app/model/UserModel.php';
@@ -36,6 +38,7 @@ require_once dirname(__DIR__) . '/core/utils/UserUtils.php';
 // Objects
 $auth = new AuthController();
 $log = new LogController();
+$wallet = new EconomyController();
 $user = new UserController();
 $userTask = new AcceptTaskController();
 $product = new ProductController();
