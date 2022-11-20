@@ -111,10 +111,34 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 if ($userTaskDetails = $userTask->getData("readActiveTask", $response->uuid, 0)) {
                     $taskDetails = $task->getData($userTaskDetails->task_id);
                     $distanceAccumulated = ($userTaskDetails->distance + $response->distance);
+
                     if ($userTask->updateData("updateTask", $response->uuid, 0, $distanceAccumulated)) {
                         if ($distanceAccumulated >= $taskDetails->task_distance) {
                             $userTask->updateData("completeTask", $response->uuid, 0, 0);
+
+                            if ($dataWallet = $wallet->getData($response->uuid)) {
+                                $currentWallet = $dataWallet->user_points;
+                                $newWallet = $currentWallet + $taskDetails->task_reward;
+
+                                if ($wallet->updateData($response->uuid, $newWallet)) {
+                                    echo json_encode(
+                                        array(
+                                            "status" => "Success",
+                                            "message" => "Wallet updated successfully"
+                                        ),
+                                        JSON_PRETTY_PRINT
+                                    );
+                                }
+                            }
+
+                            echo json_encode(array(
+                                "status" => "success",
+                                "message" => "Task successfully completed!"
+                            ), JSON_PRETTY_PRINT);
+
+                            return;
                         }
+
                         echo json_encode(array(
                             "status" => "success",
                             "message" => "Task distance updated successfully"
