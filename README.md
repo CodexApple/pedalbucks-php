@@ -7,8 +7,8 @@ and PHP as its Back-End.
 
 Progress:
 
-- Website Development: 50%
-- Mobile Development: %
+- Website Development: 80%
+- Mobile Development: ?%
 
 How to Use and Install:
 
@@ -18,4 +18,4 @@ How to Use and Install:
 4. Navigate through the folder /core/database/Database.php and modify the Username and Password variables
 5. Rename your XAMPP htdocs to htdocs-backup and create a new htdocs folder
 6. Drag all the files to new htdocs folder
-7. Run XAMPP Apache and open localhost/
+7. Run XAMPP Apache and open http://localhost/
