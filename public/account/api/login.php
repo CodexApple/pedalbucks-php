@@ -11,12 +11,31 @@ switch ($_SERVER['REQUEST_METHOD']) {
         switch ($response->submit) {
             case "loginBtn":
                 if ($userDetails = $auth->authUser($response->uuid, $response->password)) {
+                    $userTaskDetails = $userTask->getData("readActiveTask", $userDetails->uuid, 0);
+                    $dataWallet = $wallet->getData($userDetails->uuid);
+                    $taskDetails = $task->getData($userTaskDetails->task_id);
                     echo json_encode(
                         array(
                             "status" => "Success",
                             "uuid" => $userDetails->uuid,
                             "username" => $userDetails->username,
                             "email" => $userDetails->email,
+                            "taskID" => $taskDetails->id,
+                            "taskName" => $taskDetails->task_name,
+                            "taskDescription" => $taskDetails->task_description,
+                            "distanceRequired" => $taskDetails->task_distance,
+                            "difficulty" => $taskDetails->task_difficulty,
+                            "reward" => $taskDetails->task_reward,
+                            "challengeMode" => $stringUtils->translateContent($taskDetails->is_challenge),
+                            "distanceProgress" => $userTaskDetails->distance,
+                            "userTaskActive" => $stringUtils->translateContent($userTaskDetails->is_active),
+                            "userTaskChallenge" => $stringUtils->translateContent($userTaskDetails->is_challenge),
+                            "userTaskExpired" => $stringUtils->translateContent($userTaskDetails->is_expired),
+                            "userTaskCompleted" => $stringUtils->translateContent($userTaskDetails->is_completed),
+                            "userTaskRedeemed" => $stringUtils->translateContent($userTaskDetails->is_redeemed),
+                            "userTaskArchive" => $stringUtils->translateContent($userTaskDetails->is_archive),
+                            "uuid" => $dataWallet->user_uuid,
+                            "userPoints" => $dataWallet->user_points
                         ),
                         JSON_PRETTY_PRINT
                     );
