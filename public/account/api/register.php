@@ -13,7 +13,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 if ($user->getDataRecord("auth-api", $response->username)) {
                     echo json_encode(
                         array(
-                            "status" => "success",
+                            "status" => "Error",
                             "message" => "Username already exists"
                         ),
                         JSON_PRETTY_PRINT
@@ -24,7 +24,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 if ($user->getDataRecord("auth-api", $response->email)) {
                     echo json_encode(
                         array(
-                            "status" => "success",
+                            "status" => "Error",
                             "message" => "Email already exists"
                         ),
                         JSON_PRETTY_PRINT
