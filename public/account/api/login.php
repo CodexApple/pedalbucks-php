@@ -11,15 +11,23 @@ switch ($_SERVER['REQUEST_METHOD']) {
         switch ($response->submit) {
             case "loginBtn":
                 if ($userDetails = $auth->authUser($response->uuid, $response->password)) {
-                    $userTaskDetails = $userTask->getData("readActiveTask", $userDetails->uuid, 0);
-                    $dataWallet = $wallet->getData($userDetails->uuid);
-                    $taskDetails = $task->getData($userTaskDetails->task_id);
-                    echo json_encode(
-                        array(
-                            "status" => "Success",
+                    $result = array(
+                        "status" => "Success",
+                        "user" => array(
                             "uuid" => $userDetails->uuid,
                             "username" => $userDetails->username,
                             "email" => $userDetails->email,
+                        )
+                    );
+                    if ($userProfile = $profile->getData($userDetails->uuid)) {
+                        $result["profile"] = $userProfile;
+                    }
+                    if ($userWallet = $wallet->getData($userDetails->uuid)) {
+                        $result["walletPoints"] = $userWallet->user_points;
+                    }
+                    if ($userTaskDetails = $userTask->getData("readActiveTask", $userDetails->uuid, 0)) {
+                        $taskDetails = $task->getData($userTaskDetails->task_id);
+                        $result["activeTask"] = array(
                             "taskID" => $taskDetails->id,
                             "taskName" => $taskDetails->task_name,
                             "taskDescription" => $taskDetails->task_description,
@@ -34,9 +42,10 @@ switch ($_SERVER['REQUEST_METHOD']) {
                             "userTaskCompleted" => $stringUtils->translateContent($userTaskDetails->is_completed),
                             "userTaskRedeemed" => $stringUtils->translateContent($userTaskDetails->is_redeemed),
                             "userTaskArchive" => $stringUtils->translateContent($userTaskDetails->is_archive),
-                            "uuid" => $dataWallet->user_uuid,
-                            "userPoints" => $dataWallet->user_points
-                        ),
+                        );
+                    }
+                    echo json_encode(
+                        $result,
                         JSON_PRETTY_PRINT
                     );
                 } else {
