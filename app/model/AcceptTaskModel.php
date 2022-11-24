@@ -99,7 +99,7 @@ class AcceptTaskModel
                 return $this->db->execute();
                 break;
             case "completeTask":
-                $this->db->query("UPDATE $this->table SET `is_completed` = 1, `is_active` = 0 WHERE `user_uuid` = :user_uuid AND `is_active` = 1");
+                $this->db->query("UPDATE $this->table SET `is_completed` = 1 WHERE `user_uuid` = :user_uuid AND `is_active` = 1");
                 $this->db->bind(":user_uuid", $uuid);
 
                 return $this->db->execute();
