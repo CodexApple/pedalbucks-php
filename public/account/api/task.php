@@ -12,9 +12,6 @@ switch ($_SERVER['REQUEST_METHOD']) {
             case "acceptBtn":
                 if (empty($userTask->getData("readActiveTask", $response->uuid, 0))) {
                     if (!empty($response->id)) {
-                        /*
-                        * Save user task when there are no existing tasks, and response id is present
-                        */
                         if ($userTask->saveData($response->uuid, $response->id)) {
                             $userTaskDetails = $userTask->getData("readActiveTask", $response->uuid, 0);
                             $taskDetails = $task->getData($userTaskDetails->task_id);
@@ -149,6 +146,29 @@ switch ($_SERVER['REQUEST_METHOD']) {
                         "status" => "failed",
                         "message" => "Please accept a task from the task list."
                     ), JSON_PRETTY_PRINT);
+                }
+                break;
+            case "claimBtn":
+                if ($userTaskDetails = $userTask->getData("readActiveTask", $response->uuid, 0)) {
+                    if ($userTaskDetails->is_completed = 1) {
+                        if ($dataWallet = $wallet->getData($response->uuid)) {
+                            $currentWallet = $dataWallet->user_points;
+                            $newWallet = $currentWallet + $taskDetails->task_reward;
+                            $wallet->updateData($response->uuid, $newWallet);
+
+                            echo json_encode(array(
+                                "status" => "success",
+                                "message" => "Task successfully completed!"
+                            ), JSON_PRETTY_PRINT);
+                        }
+
+                        echo json_encode(array(
+                            "status" => "success",
+                            "message" => "Task successfully completed!"
+                        ), JSON_PRETTY_PRINT);
+
+                        return;
+                    }
                 }
                 break;
         }
