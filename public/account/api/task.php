@@ -86,14 +86,14 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 }
                 break;
             case "claimBtn":
-                if ($userTaskDetails = $userTask->getData("readActiveTask", $response->uuid, 0)) {
+                if ($userTaskDetails = $userTask->getData("readTask", $response->uuid, $response->id)) {
                     $taskDetails = $task->getData($userTaskDetails->task_id);
                     if ($userTaskDetails->is_completed = 1) {
                         if ($dataWallet = $wallet->getData($response->uuid)) {
                             $currentWallet = $dataWallet->user_points;
                             $newWallet = $currentWallet + $taskDetails->task_reward;
                             $wallet->updateData($response->uuid, $newWallet);
-                            $userTask->updateData("updateOldTask", $response->uuid, 0, 0);
+                            $userTask->updateData("redeemTask", $response->uuid, $response->id, 0);
 
                             echo json_encode(array(
                                 "status" => "success",

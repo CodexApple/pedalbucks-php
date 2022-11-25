@@ -34,6 +34,13 @@ class AcceptTaskModel
     public function read($action, $id, $tid)
     {
         switch ($action) {
+            case "readTask":
+                $this->db->query("SELECT * FROM $this->table WHERE `user_uuid` = :id AND `task_id` = :tid");
+                $this->db->bind(":id", $id);
+                $this->db->bind(":tid", $tid);
+
+                return $this->db->find();
+                break;
             case "readAllTask":
                 $this->db->query("SELECT * FROM $this->table WHERE `user_uuid` = :id");
                 $this->db->bind(":id", $id);
@@ -101,6 +108,13 @@ class AcceptTaskModel
             case "completeTask":
                 $this->db->query("UPDATE $this->table SET `is_completed` = 1 WHERE `user_uuid` = :user_uuid AND `is_active` = 1");
                 $this->db->bind(":user_uuid", $uuid);
+
+                return $this->db->execute();
+                break;
+            case "redeemTask":
+                $this->db->query("UPDATE $this->table SET  `is_active` = 0, `is_archive` = 1, `is_redeemed` = 1 WHERE `user_uuid` = :user_uuid AND `task_id` = :task_id AND `is_completed` = 1");
+                $this->db->bind(":user_uuid", $uuid);
+                $this->db->bind(":task_id", $task_id);
 
                 return $this->db->execute();
                 break;
