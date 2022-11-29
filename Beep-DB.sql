@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `beep_crms` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `beep_crms`;
 -- MySQL dump 10.13  Distrib 8.0.30, for Win64 (x86_64)
 --
 -- Host: localhost    Database: beep_crms
@@ -137,7 +139,7 @@ CREATE TABLE `tbl_log` (
   `is_read` int DEFAULT NULL,
   `is_archive` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -146,7 +148,7 @@ CREATE TABLE `tbl_log` (
 
 LOCK TABLES `tbl_log` WRITE;
 /*!40000 ALTER TABLE `tbl_log` DISABLE KEYS */;
-INSERT INTO `tbl_log` VALUES (1,'bda0-ef3b-dfa5-4bca',0,'Created new Task','CodexApple created a new task, detailed link: pedalbucks.gq?taskid','2022-11-14','06:02:20',1,1),(2,'bda0-ef3b-dfa5-4bca',0,'Created new Task','CodexApple created a new task, detailed link: pedalbucks.gq?taskid','2022-11-17','06:26:48',1,1);
+INSERT INTO `tbl_log` VALUES (1,'bda0-ef3b-dfa5-4bca',0,'Created new Task','CodexApple created a new task, detailed link: pedalbucks.gq?taskid','2022-11-14','06:02:20',1,1),(2,'bda0-ef3b-dfa5-4bca',0,'Created new Task','CodexApple created a new task, detailed link: pedalbucks.gq?taskid','2022-11-17','06:26:48',1,1),(3,'bda0-ef3b-dfa5-4bca',0,'Created new Task','CodexApple created a new task, detailed link: pedalbucks.gq?taskid','2022-11-24','11:49:54',1,1);
 /*!40000 ALTER TABLE `tbl_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -162,8 +164,11 @@ CREATE TABLE `tbl_product` (
   `brand_id` int DEFAULT NULL,
   `category_id` int DEFAULT NULL,
   `name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(1024) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `description` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `price` int DEFAULT NULL,
+  `current_claim` int DEFAULT NULL,
+  `max_claim` int DEFAULT NULL,
   `is_archive` int DEFAULT NULL,
   `is_discount` int DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -217,6 +222,32 @@ INSERT INTO `tbl_profile` VALUES (1,'bda0-ef3b-dfa5-4bca','Kristofer Martin','Ra
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tbl_redeem`
+--
+
+DROP TABLE IF EXISTS `tbl_redeem`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tbl_redeem` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_uuid` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `product_id` int DEFAULT NULL,
+  `product_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `is_used` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tbl_redeem`
+--
+
+LOCK TABLES `tbl_redeem` WRITE;
+/*!40000 ALTER TABLE `tbl_redeem` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbl_redeem` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tbl_statistic`
 --
 
@@ -260,7 +291,7 @@ CREATE TABLE `tbl_task` (
   `is_expired` int DEFAULT NULL,
   `is_archive` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -269,7 +300,7 @@ CREATE TABLE `tbl_task` (
 
 LOCK TABLES `tbl_task` WRITE;
 /*!40000 ALTER TABLE `tbl_task` DISABLE KEYS */;
-INSERT INTO `tbl_task` VALUES (1,'Cycle for 20M','Cycle for 20 meters to receive a reward.','20',1,100,1,0,0),(2,'Cycle for 15M','Cycle for 15 meters to receive a reward.','15',1,100,1,0,0);
+INSERT INTO `tbl_task` VALUES (1,'Cycle for 20M','Cycle for 20 meters to receive a reward.','20',1,100,1,0,0),(2,'Cycle for 15M','Cycle for 15 meters to receive a reward.','15',1,100,1,0,0),(3,'Cycle for 30M','Cycle for 30 meters to receive a reward.','30',NULL,150,0,0,0);
 /*!40000 ALTER TABLE `tbl_task` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -315,4 +346,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-20 20:58:30
+-- Dump completed on 2022-11-29 20:17:24
