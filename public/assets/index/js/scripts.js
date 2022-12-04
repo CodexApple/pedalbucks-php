@@ -87,13 +87,12 @@ window.addEventListener('DOMContentLoaded', event => {
 // })();
 
 const jsonQuery = JSON.stringify({ 
-    uuid: "testtester", 
-    password: "password", 
-    submit: "loginBtn", 
+    uuid: "bda0-ef3b-dfa5-4bca",
+    submit: "claimBtn", 
 });
 
 (async () => {
-    const rawResponse = await fetch('http://localhost/account/api/login', {
+    const rawResponse = await fetch('http://localhost:8080/account/api/task', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -101,7 +100,7 @@ const jsonQuery = JSON.stringify({
         body: jsonQuery
     });
 
-    const content = await rawResponse.json();
+    const content = await rawResponse.text();
     console.log(content);
 
 })();

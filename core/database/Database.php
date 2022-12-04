@@ -13,9 +13,9 @@ class DatabaseManager
 
     public function __construct()
     {
-        $dbHost = '127.0.0.1:40000';
+        $dbHost = 'localhost:3306';
         $dbUser = 'root';
-        $dbPass = 'root';
+        $dbPass = '';
         $dbName = 'beep_crms';
         $dbURL = 'mysql:host=' . $dbHost . ';dbname=' . $dbName;
 
