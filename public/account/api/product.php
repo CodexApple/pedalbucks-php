@@ -16,7 +16,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                     $productDetails = $product->getData($response->id);
                     $userWallet = $wallet->getData($response->uuid);
 
-                    if ($productDetails->current_claim >= $productDetails->max_claim) {
+                    if ($productDetails->current_claim <= $productDetails->max_claim) {
                         if (($userWallet->user_points >= $productDetails->price)) {
                             $newPoints = $userWallet->user_points - $productDetails->price;
 
