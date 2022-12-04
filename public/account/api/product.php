@@ -16,7 +16,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                     $productDetails = $product->getData($response->id);
                     $userWallet = $wallet->getData($response->uuid);
 
-                    if ($productDetails->current_claim >= $productDetails->max_claim) {
+                    if ($productDetails->current_claim < $productDetails->max_claim) {
                         if (($userWallet->user_points >= $productDetails->price)) {
                             $newPoints = $userWallet->user_points - $productDetails->price;
 
@@ -30,10 +30,12 @@ switch ($_SERVER['REQUEST_METHOD']) {
                             echo json_encode(
                                 array(
                                     "status" => "success",
-                                    "message" => "Product redeemed successfully"
+                                    "message" => "Product redeemed successfully",
+                                    "newPoints" => $newPoints
                                 ),
                                 JSON_PRETTY_PRINT
                             );
+                            return;
                         } else {
                             echo json_encode(
                                 array(
@@ -42,6 +44,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                                 ),
                                 JSON_PRETTY_PRINT
                             );
+                            return;
                         }
                     } else {
                         echo json_encode(
@@ -51,15 +54,27 @@ switch ($_SERVER['REQUEST_METHOD']) {
                             ),
                             JSON_PRETTY_PRINT
                         );
+                        return;
                     }
                 }
         }
+        break;
     case "GET":
-        if ((!isset($_GET['prod_id']) || empty($_GET['prod_id'])) && $productData = $product->getAllData()) {
-            echo json_encode(
-                $productData,
-                JSON_PRETTY_PRINT
-            );
+        if ((!isset($_GET['prod_id']) || empty($_GET['prod_id']))) {
+            if($productData = $product->getAllData()) {
+                echo json_encode(
+                    $productData,
+                    JSON_PRETTY_PRINT
+                );
+                return;
+            }
+            else {
+                echo json_encode(array(
+                    "status" => "error",
+                    "message" => "Products not found."
+                ), JSON_PRETTY_PRINT);
+                return;
+            }
         }
         if (isset($_GET['prod_id']) && $productData = $product->getData($_GET['prod_id'])) {
             echo json_encode(
