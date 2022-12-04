@@ -6,15 +6,25 @@ class UserStatsModel
 {
     /** @var DatabaseManager */
     private $db;
-    private $table = 'tbl_user_statistic';
+    private $table = 'tbl_statistic';
 
     public function __construct()
     {
         $this->db = new DatabaseManager();
     }
 
-    public function create()
+    public function create($uuid, $unix, $speed, $distance, $calories)
     {
+        $this->db->query("INSERT INTO $this->table (`user_uuid`, `datetime`, `speed`, `distance`, `calories`)
+            VALUES(:uuid, :unix, :speed, :distance, :calories)");
+
+        $this->db->bind(":uuid", $uuid);
+        $this->db->bind(":unix", $unix);
+        $this->db->bind(":speed", $speed);
+        $this->db->bind(":distance", $distance);
+        $this->db->bind(":calories", $calories);
+
+        $this->db->execute();
     }
 
     public function read($id)

@@ -257,6 +257,7 @@ DROP TABLE IF EXISTS `tbl_statistic`;
 CREATE TABLE `tbl_statistic` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_uuid` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `datetime` int DEFAULT NULL,
   `speed` float DEFAULT NULL,
   `distance` int DEFAULT NULL,
   `calories` int DEFAULT NULL,
@@ -346,4 +347,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-29 20:17:24
+-- Dump completed on 2022-12-04 16:51:31

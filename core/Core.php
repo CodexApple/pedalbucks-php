@@ -20,6 +20,7 @@ require_once dirname(__DIR__) . '/app/controller/ProfileController.php';
 require_once dirname(__DIR__) . '/app/controller/RedeemController.php';
 require_once dirname(__DIR__) . '/app/controller/TaskController.php';
 require_once dirname(__DIR__) . '/app/controller/UserController.php';
+require_once dirname(__DIR__) . '/app/controller/UserStatsController.php';
 
 // Models
 require_once dirname(__DIR__) . '/app/model/system/LogModel.php';
@@ -29,6 +30,7 @@ require_once dirname(__DIR__) . '/app/model/ProductModel.php';
 require_once dirname(__DIR__) . '/app/model/ProfileModel.php';
 require_once dirname(__DIR__) . '/app/model/RedeemModel.php';
 require_once dirname(__DIR__) . '/app/model/UserModel.php';
+require_once dirname(__DIR__) . '/app/model/UserStatsModel.php';
 require_once dirname(__DIR__) . '/app/model/TaskModel.php';
 
 // Utils
@@ -46,6 +48,7 @@ $userTask = new AcceptTaskController();
 $product = new ProductController();
 $profile = new ProfileController();
 $redeem = new RedeemController();
+$stat = new UserStatsController();
 $task = new TaskController();
 
 // Utility
