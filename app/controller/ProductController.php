@@ -25,8 +25,9 @@ class ProductController
         return $this->var->readAll();
     }
 
-    public function updateData()
+    public function updateData($id, $claim)
     {
+        return $this->var->update($id, $claim);
     }
 
     public function deleteData($id)

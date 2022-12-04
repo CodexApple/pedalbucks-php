@@ -44,8 +44,14 @@ class ProductModel
         return $this->db->findAll();
     }
 
-    public function update()
+    public function update($id, $claim)
     {
+        $this->db->query("UPDATE $this->table SET `current_claim` = :claim WHERE `id` = :id");
+
+        $this->db->bind(":id", $id);
+        $this->db->bind(":claim", $claim);
+
+        return $this->db->execute();
     }
 
     public function delete($id)

@@ -20,8 +20,12 @@ switch ($_SERVER['REQUEST_METHOD']) {
                         if (($userWallet->user_points >= $productDetails->price)) {
                             $newPoints = $userWallet->user_points - $productDetails->price;
 
+                            $currentClaim = $productDetails->current_claim;
+                            $newClaim = $currentClaim + 1;
+
                             $wallet->updateData($response->uuid, $newPoints);
                             $redeem->saveData($response->uuid, $response->id, $stringUtils->skuGen());
+                            $product->updateData($response->uuid, $newClaim);
 
                             echo json_encode(
                                 array(
