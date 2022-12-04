@@ -33,6 +33,11 @@ class UserController
         return $this->var->create($uuid, $username, $email, $hashPassword, $oldPassword, $datejoin, $firstJoin, $archive, $banned);
     }
 
+    public function showUUID()
+    {
+        return $this->stringUtils->skuGen();
+    }
+
     public function saveData()
     {
 

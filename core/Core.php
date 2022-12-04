@@ -17,6 +17,7 @@ require_once dirname(__DIR__) . '/app/controller/AcceptTaskController.php';
 require_once dirname(__DIR__) . '/app/controller/EconomyController.php';
 require_once dirname(__DIR__) . '/app/controller/ProductController.php';
 require_once dirname(__DIR__) . '/app/controller/ProfileController.php';
+require_once dirname(__DIR__) . '/app/controller/RedeemController.php';
 require_once dirname(__DIR__) . '/app/controller/TaskController.php';
 require_once dirname(__DIR__) . '/app/controller/UserController.php';
 
@@ -26,6 +27,7 @@ require_once dirname(__DIR__) . '/app/model/AcceptTaskModel.php';
 require_once dirname(__DIR__) . '/app/model/EconomyModel.php';
 require_once dirname(__DIR__) . '/app/model/ProductModel.php';
 require_once dirname(__DIR__) . '/app/model/ProfileModel.php';
+require_once dirname(__DIR__) . '/app/model/RedeemModel.php';
 require_once dirname(__DIR__) . '/app/model/UserModel.php';
 require_once dirname(__DIR__) . '/app/model/TaskModel.php';
 
@@ -43,6 +45,7 @@ $user = new UserController();
 $userTask = new AcceptTaskController();
 $product = new ProductController();
 $profile = new ProfileController();
+$redeem = new RedeemController();
 $task = new TaskController();
 
 // Utility
