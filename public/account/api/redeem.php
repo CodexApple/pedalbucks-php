@@ -9,8 +9,24 @@ $response = json_decode($rawData);
 switch ($_SERVER['REQUEST_METHOD']) {
     case "GET":
         if (isset($_GET['uuid']) && $redeemDetails = $redeem->getData($_GET['uuid'])) {
+
+            $array = array();
+
+            foreach ($redeem->getAllData() as $inventory => $data) {
+                if ($data->user_uuid == $_GET['uuid']) {
+                    $array[] = array(
+                        "userUUID" => $data->user_uuid,
+                        "productId" => $data->product_id,
+                        "productName" => $product->getData($data->product_id)->name,
+                        "productDescription" => $product->getData($data->product_id)->description,
+                        "productCode" => $data->product_code,
+                        "isUsed" => $data->is_used,
+                    );
+                }
+            }
+
             echo json_encode(
-                $redeemDetails,
+                $array,
                 JSON_PRETTY_PRINT
             );
         } else {

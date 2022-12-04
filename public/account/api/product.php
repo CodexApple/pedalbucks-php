@@ -16,16 +16,34 @@ switch ($_SERVER['REQUEST_METHOD']) {
                     $productDetails = $product->getData($response->id);
                     $userWallet = $wallet->getData($response->uuid);
 
-                    if ($userWallet->user_points >= $productDetails->price) {
-                        $newPoints = $userWallet->user_points - $productDetails->price;
+                    if ($productDetails->current_claim >= $productDetails->max_claim) {
+                        if (($userWallet->user_points >= $productDetails->price)) {
+                            $newPoints = $userWallet->user_points - $productDetails->price;
 
-                        $wallet->updateData($response->uuid, $newPoints);
-                        $redeem->saveData($response->uuid, $response->id, $stringUtils->skuGen());
+                            $wallet->updateData($response->uuid, $newPoints);
+                            $redeem->saveData($response->uuid, $response->id, $stringUtils->skuGen());
 
+                            echo json_encode(
+                                array(
+                                    "status" => "success",
+                                    "message" => "Product redeemed successfully"
+                                ),
+                                JSON_PRETTY_PRINT
+                            );
+                        } else {
+                            echo json_encode(
+                                array(
+                                    "status" => "failed",
+                                    "message" => "You do not have enough points to purchase this product"
+                                ),
+                                JSON_PRETTY_PRINT
+                            );
+                        }
+                    } else {
                         echo json_encode(
                             array(
-                                "status" => "success",
-                                "message" => "Product redeemed successfully"
+                                "status" => "failed",
+                                "message" => "The product has already reached its max claim limit"
                             ),
                             JSON_PRETTY_PRINT
                         );
