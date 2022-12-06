@@ -61,14 +61,13 @@ switch ($_SERVER['REQUEST_METHOD']) {
         break;
     case "GET":
         if ((!isset($_GET['prod_id']) || empty($_GET['prod_id']))) {
-            if($productData = $product->getAllData()) {
+            if ($productData = $product->getAllData()) {
                 echo json_encode(
                     $productData,
                     JSON_PRETTY_PRINT
                 );
                 return;
-            }
-            else {
+            } else {
                 echo json_encode(array(
                     "status" => "error",
                     "message" => "Products not found."
