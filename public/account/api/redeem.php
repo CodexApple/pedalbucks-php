@@ -8,7 +8,7 @@ $response = json_decode($rawData);
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case "GET":
-        if (isset($_GET['uuid']) && $redeemDetails = $redeem->getData($_GET['uuid'])) {
+        if (isset($_GET['uuid'])) {
 
             $array = array();
 
@@ -16,10 +16,11 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 if ($data->user_uuid == $_GET['uuid']) {
                     $array[] = array(
                         "userUUID" => $data->user_uuid,
-                        "productId" => $data->product_id,
-                        "productName" => $product->getData($data->product_id)->name,
-                        "productDescription" => $product->getData($data->product_id)->description,
-                        "productCode" => $data->product_code,
+                        "id" => $data->product_id,
+                        "name" => $product->getData($data->product_id)->name,
+                        "description" => $product->getData($data->product_id)->description,
+                        "image" => $product->getData($data->product_id)->image,
+                        "voucherCode" => $data->product_code,
                         "isUsed" => $data->is_used,
                     );
                 }

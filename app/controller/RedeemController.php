@@ -15,9 +15,9 @@ class RedeemController
         return $this->var->create($uuid, $pid, $code);
     }
 
-    public function getData($id)
+    public function getData($id, $prod_id)
     {
-        return $this->var->read($id);
+        return $this->var->read($id, $prod_id);
     }
 
     public function getAllData()
