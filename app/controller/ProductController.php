@@ -10,9 +10,13 @@ class ProductController
         $this->var = new ProductModel();
     }
 
-    public function saveData()
+    public function saveData($name, $desc)
     {
-        return $this->var->create();
+
+        $name = isset($_POST['name']) ? $_POST['name'] : "";
+        $desc = isset($_POST['description']) ? $_POST['description'] : "";
+
+        return $this->var->create($name, $desc);
     }
 
     public function getData($id)

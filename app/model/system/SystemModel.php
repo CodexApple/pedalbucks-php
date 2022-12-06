@@ -15,6 +15,9 @@ class SystemModel
 
     public function create()
     {
+        $this->db->query();
+
+        return $this->db->execute;
     }
 
     public function read($id)

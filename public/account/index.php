@@ -9,6 +9,15 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 $log->saveData(0, "Created new Task", $_SESSION['user']->username . " created a new task, detailed link: pedalbucks.gq?taskid");
                 header("Location: /account/?field=3&content=task&action=success");
             } else header("Location: /account/?field=3&content=task&action=failed");
+
+            return;
+        }
+
+        if (isset($_POST['saveProduct'])) {
+            if ($product->saveData()) {
+                $log->saveData("Added a new Product", $_SESSION['user']->username . " added a new product, detailed link: pedalbucks.gq?pid=");
+                header("Location: /account/?field=4&content=product&action=success");
+            } else header("Location: /account/?field=4&content=product&action=failed");
         }
 }
 
