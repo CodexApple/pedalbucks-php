@@ -25,7 +25,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
                             $wallet->updateData($response->uuid, $newPoints);
                             $redeem->saveData($response->uuid, $response->id, $stringUtils->skuGen());
-                            $product->updateData($response->uuid, $newClaim);
+                            $product->updateData($response->id, $newClaim);
 
                             echo json_encode(
                                 array(
