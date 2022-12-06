@@ -8,7 +8,7 @@ $response = json_decode($rawData);
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case "GET":
-        if (isset($_GET['uuid']) && $redeemDetails = $redeem->getData($_GET['uuid'])) {
+        if (isset($_GET['uuid'])) {
 
             $array = array();
 

@@ -16,6 +16,17 @@ switch ($_SERVER['REQUEST_METHOD']) {
                     $productDetails = $product->getData($response->id);
                     $userWallet = $wallet->getData($response->uuid);
 
+                    if($redeem->getData($response->uuid, $response->id)) {
+                        echo json_encode(
+                            array(
+                                "status" => "failed",
+                                "message" => "You have an unused voucher of this type."
+                            ),
+                            JSON_PRETTY_PRINT
+                        );
+                        return;
+                    }
+
                     if ($productDetails->current_claim < $productDetails->max_claim) {
                         if (($userWallet->user_points >= $productDetails->price)) {
                             $newPoints = $userWallet->user_points - $productDetails->price;
