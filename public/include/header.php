@@ -211,13 +211,13 @@
                                     </a>
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link">
+                                            <a href="?field=5&content=profile" class="nav-link">
                                                 <i class="fas fa-folder nav-icon"></i>
                                                 <p>Profile List</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link">
+                                            <a href="?field=5&content=user" class="nav-link">
                                                 <i class="fas fa-folder nav-icon"></i>
                                                 <p>User List</p>
                                             </a>

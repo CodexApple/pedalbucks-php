@@ -24,7 +24,14 @@
                     dataType: 'JSON',
                     success: function(response) {
                         const span = document.getElementById('currentTime');
-                        span.innerHTML = '<span id="currentTime">' + response['formattedTime'] + '</span>';
+
+                        var result = response['formattedTime'];
+
+                        if (result != null) {
+                            span.innerHTML = '<span id="currentTime">' + response['formattedTime'] + '</span>';
+                        } else {
+                            span.innerHTML = '<span id="currentTime">' + response['message'] + '</span>';
+                        }
                     }
                 });
             }, 1000);

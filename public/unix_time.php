@@ -2,7 +2,7 @@
 
 header("Content-Type: application/json");
 
-$unix_time = mktime(11, 59, 59, 11, 25, 2022);
+$unix_time = mktime(11, 59, 59, 12, 24, 2022);
 $current_time = time();
 
 $diff = $unix_time - $current_time;

@@ -28,6 +28,15 @@ class StringUtils
         return ($id != 0 ? "Yes" : "No");
     }
 
+    public function isArchive($id)
+    {
+        return ($id != 0 ? "Hidden" : "Visible");
+    }
+
+    public function coloredProduct($int)
+    {
+        return $int == 0 ? "success" : ($int == 1 ? "danger" : null);
+    }
 
     // $icon = error, warning, info, success
     public function setMessage($icon, $message)

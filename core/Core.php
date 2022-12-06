@@ -6,6 +6,7 @@ session_start();
 // Config
 $BASE_URL = 'localhost';
 $ROOT_URL = '/public/';
+$NOT_FOUND = '/time_display';
 
 // Database
 require_once dirname(__DIR__) . '/core/database/Database.php';

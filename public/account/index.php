@@ -15,7 +15,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
         if (isset($_POST['saveProduct'])) {
             if ($product->saveData()) {
-                $log->saveData("Added a new Product", $_SESSION['user']->username . " added a new product, detailed link: pedalbucks.gq?pid=");
+                $log->saveData(0, "Added a new Product", $_SESSION['user']->username . " added a new product, detailed link: pedalbucks.gq?pid=");
                 header("Location: /account/?field=4&content=product&action=success");
             } else header("Location: /account/?field=4&content=product&action=failed");
         }
@@ -45,6 +45,14 @@ switch ($_SESSION['user']->usertype) {
                 require_once $_SERVER['DOCUMENT_ROOT'] . '/public/include/inject/admin/economy.php';
             } elseif ($_GET['field'] == 3 && $_GET['content'] == 'task') {
                 require_once $_SERVER['DOCUMENT_ROOT'] . '/public/include/inject/admin/task.php';
+            } elseif ($_GET['field'] == 4 && $_GET['content'] == 'product') {
+                require_once $_SERVER['DOCUMENT_ROOT'] . '/public/include/inject/admin/product.php';
+            } elseif ($_GET['field'] == 5 && $_GET['content'] == 'profile') {
+                require_once $_SERVER['DOCUMENT_ROOT'] . '/public/include/inject/admin/profile.php';
+            } elseif ($_GET['field'] == 5 && $_GET['content'] == 'user') {
+                require_once $_SERVER['DOCUMENT_ROOT'] . '/public/include/inject/admin/user.php';
+            } else {
+                echo '<script>window.location="' . $NOT_FOUND . '";</script>';
             }
         }
         break;

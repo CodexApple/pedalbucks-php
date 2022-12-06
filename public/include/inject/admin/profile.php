@@ -2,12 +2,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Product</h1>
+                <h1 class="m-0">Profile</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="/account/">Home</a></li>
-                    <li class="breadcrumb-item active">Products</li>
+                    <li class="breadcrumb-item active">Profile</li>
                 </ol>
             </div>
         </div>
@@ -20,9 +20,9 @@
         <?php
         if (isset($_GET['action'])) {
             if ($_GET['action'] == "success") {
-                $stringUtils->setMessage("success", "Successfully added a new product.");
+                $stringUtils->setMessage("success", "Successfully added a new profile.");
             } else {
-                $stringUtils->setMessage("error", "Failed to add new product.");
+                $stringUtils->setMessage("error", "Failed to add new profile.");
             }
         }
         ?>
@@ -33,40 +33,32 @@
                 <form id="taskForm" class="modal-content" method="POST" action="/account/">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Add new product</h5>
+                            <h5 class="modal-title" id="exampleModalLongTitle">Create New User</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div class="form-group">
-                                <label>Product Name</label>
-                                <input type="text" name="name" class="form-control" placeholder="Enter product name" required />
-                            </div>
-                            <div class="form-group">
-                                <label>Product Description</label>
-                                <input type="text" name="description" class="form-control" placeholder="Enter product description" required />
-                            </div>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label>Points Required <i class="text-danger">(Required)</i></label>
-                                        <input type="text" name="price" class="form-control" placeholder="Enter points required to claim" required />
+                                        <label>Distance <i class="text-danger">(Required)</i></label>
+                                        <input type="text" name="taskDistance" class="form-control" placeholder="Enter task distance" required />
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label>Max Claims <i class="text-danger">(Required)</i></label>
-                                        <input type="text" name="max_claims" class="form-control" placeholder="Enter max claim amount" required />
+                                        <label>Reward <i class="text-danger">(Required)</i></label>
+                                        <input type="text" name="reward" class="form-control" placeholder="Enter reward value" required />
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Product Image</label>
-                            </div>
-                            <div class="custom-file">
-                                <input type="file" name="file" class="custom-file-input" id="customFile" required />
-                                <label class="custom-file-label" for="customFile">Choose File...</label>
+                                <label>Challenge <i class="text-danger">(Required)</i></label>
+                                <select form="taskForm" name="isChallenge" class="form-control">
+                                    <option value="1">No</option>
+                                    <option value="0">Yes</option>
+                                </select>
                             </div>
                             <!-- <div class="custom-file">
                                 <input type="file" name="file" class="custom-file-input" id="customFile" required />
@@ -74,13 +66,13 @@
                             </div> -->
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" name="saveProduct" class="btn btn-success">
-                                <i class="fas fa-upload"></i>
-                                <span>Save Product</span>
-                            </button>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+                            <button type="button" class="btn btn-warning" data-dismiss="modal">
                                 <i class="fas fa-times-circle"></i>
                                 <span>Cancel</span>
+                            </button>
+                            <button type="submit" name="uploadTaskBtn" class="btn btn-primary">
+                                <i class="fas fa-upload"></i>
+                                <span>Create Task</span>
                             </button>
                         </div>
                     </div>
@@ -107,12 +99,12 @@
                             <i class="fas fa-cogs"></i>Settings
                         </button>
                         <button class="btn btn-app bg-info" data-toggle="modal" data-target="#uploadModal">
-                            <!-- <span class="badge bg-teal">DEBUG MODE</span> -->
-                            <i class="fas fa-upload"></i>Save Product
+                            <span class="badge bg-teal">DEBUG MODE</span>
+                            <i class="fas fa-upload"></i>Save Profile
                         </button>
                         <button class="btn btn-app bg-danger" data-toggle="modal" data-target="#resetModal">
                             <span class="badge bg-teal">DEBUG MODE</span>
-                            <i class="fas fa-trash"></i>Delete Product
+                            <i class="fas fa-trash"></i>Reset Profile
                         </button>
                     </div>
                 </div>
@@ -122,7 +114,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Product</h3>
+                        <h3 class="card-title">User Tools</h3>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                 <i class="fas fa-minus"></i>
@@ -136,26 +128,24 @@
                         <table id="adsTable" class="table table-striped table-hover">
                             <thead>
                                 <tr>
-                                    <th>Product#ID</th>
-                                    <th>Name</th>
-                                    <th>Description</th>
-                                    <th>Price</th>
-                                    <th>Current Claims</th>
-                                    <th>Maximum Claims</th>
-                                    <th>Status</th>
+                                    <th>User#UUID</th>
+                                    <th>Full Name</th>
+                                    <th>Address</th>
+                                    <th>Birthday</th>
+                                    <th>Telephone</th>
+                                    <th>Cellphone</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($product->getAllData() as $key => $data) : ?>
+                                <?php foreach ($profile->getAllData() as $key => $data) : ?>
                                     <tr>
-                                        <td>#<?= $data->id; ?></td>
-                                        <td><?= $data->name ?></td>
-                                        <td><?= $data->description; ?></td>
-                                        <td><?= $data->price; ?></td>
-                                        <td><?= $data->current_claim; ?></td>
-                                        <td><?= $data->max_claim; ?></td>
-                                        <td><span class="badge badge-pill bg-<?= $stringUtils->coloredProduct($data->is_archive); ?>"><?= $stringUtils->isArchive($data->is_archive); ?></span></td>
+                                        <td><?= strtoupper($data->user_uuid); ?></td>
+                                        <td><?= $data->firstname . " " . $data->lastname; ?></td>
+                                        <td><?= $data->address ?></td>
+                                        <td><?= $data->birthday; ?></td>
+                                        <td><?= $data->telephone; ?></td>
+                                        <td><?= $data->cellphone; ?></td>
                                         <td class="text-right py-0 align-middle">
                                             <div class="btn-group btn-group-sm">
                                                 <a href="#" class="btn btn-info" style="margin-right: 5px;">
@@ -184,10 +174,3 @@
     </div>
 </div>
 </div>
-
-<script>
-    $(".custom-file-input").on("change", function() {
-        var fileName = $(this).val().split("\\").pop();
-        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-    });
-</script>

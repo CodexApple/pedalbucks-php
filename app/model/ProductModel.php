@@ -13,16 +13,19 @@ class ProductModel
         $this->db = new DatabaseManager();
     }
 
-    public function create($bid = 1, $cid = 1, $name, $desc, $price = 0, $archive = 0, $discount = 0)
+    public function create($name, $desc, $image, $max_claim, $price, $current_claim = 0, $bid = 1, $cid = 1, $archive = 0, $discount = 0)
     {
-        $this->db->query("INSERT INTO $this->table (`brand_id`, `category_id`, `name` , `description`, `price`, `is_archive`, `is_discount`)
-            VALUES (:bid, :cid, :name, :desc, :price, :archive, :discount)");
+        $this->db->query("INSERT INTO $this->table (`brand_id`, `category_id`, `name` , `image`, `description`, `price`, `current_claim`, `max_claim`, `is_archive`, `is_discount`)
+            VALUES (:bid, :cid, :name, :image, :desc, :price, :current, :max_claim, :archive, :discount)");
 
         $this->db->bind(":bid", $bid);
         $this->db->bind(":cid", $cid);
         $this->db->bind(":name", $name);
+        $this->db->bind(":image", $image);
         $this->db->bind(":desc", $desc);
         $this->db->bind(":price", $price);
+        $this->db->bind(":current", $current_claim);
+        $this->db->bind(":max_claim", $max_claim);
         $this->db->bind(":archive", $archive);
         $this->db->bind(":discount", $discount);
 
