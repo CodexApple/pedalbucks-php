@@ -24,7 +24,7 @@ class UserStatsModel
         $this->db->bind(":distance", $distance);
         $this->db->bind(":calories", $calories);
 
-        $this->db->execute();
+        return $this->db->execute();
     }
 
     public function read($id)
