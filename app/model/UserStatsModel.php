@@ -32,7 +32,7 @@ class UserStatsModel
         $this->db->query("SELECT * FROM $this->table WHERE `user_uuid` = :id");
         $this->db->bind(":id", $id);
 
-        return $this->db->find();
+        return $this->db->findAll();
     }
 
     public function readAll()

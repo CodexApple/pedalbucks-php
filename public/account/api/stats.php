@@ -25,13 +25,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
     case "GET":
         if (isset($_GET['uuid']) && $userStat = $stat->getData($_GET['uuid'])) {
             echo json_encode(
-                array(
-                    "uuid" => $userStat->user_uuid,
-                    "DateTime" => $userStat->datetime,
-                    "DistanceTravelled" => $userStat->distance,
-                    "CaloriesBurned" => $userStat->calories,
-                    "AverageSpeed" => $userStat->speed
-                ),
+                $userStat,
                 JSON_PRETTY_PRINT
             );
             return;
