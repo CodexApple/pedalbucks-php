@@ -19,7 +19,7 @@ if (!empty($_SESSION['user'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Circle.gg | Log In</title>
+    <title>Pedalbucks PH | Log In</title>
     <link rel="icon" type="image/x-icon" href="/assets/index/favicon.ico" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="/assets/js/plugins/fontawesome-free/css/all.min.css">
@@ -33,7 +33,7 @@ if (!empty($_SESSION['user'])) {
     <div class="login-box">
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="/" class="h1"><b>Circle</b>Gaming</a>
+                <a href="/" class="h1"><b>Pedal</b>Bucks</a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
@@ -43,7 +43,7 @@ if (!empty($_SESSION['user'])) {
                         <input type="text" name="uuid" class="form-control" placeholder="Enter your ID">
                         <div class="input-group-append">
                             <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
+                                <span class="fas fa-user"></span>
                             </div>
                         </div>
                     </div>
@@ -51,7 +51,7 @@ if (!empty($_SESSION['user'])) {
                         <input type="password" name="password" class="form-control" placeholder="Password">
                         <div class="input-group-append">
                             <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
+                                <span class="fas fa-key"></span>
                             </div>
                         </div>
                     </div>
