@@ -23,26 +23,56 @@ switch ($_SERVER['REQUEST_METHOD']) {
         }
         break;
     case "GET":
-        if (isset($_GET['uuid'])) {
-            if ($userStat = $stat->getData($_GET['uuid'])) {
-                echo json_encode(
-                    array(
-                        "status" => "success",
-                        "activityLogs" => $userStat
-                    ),
-                    JSON_PRETTY_PRINT
-                );
-                return;
-            }
-            else {
-                echo json_encode(
-                    array(
-                        "status" => "failed",
-                        "message" => "Activity logs not found."
-                    ),
-                    JSON_PRETTY_PRINT
-                );
-                return;
+        if (isset($_GET['action'])) {
+            switch ($_GET['action']) {
+                case 'all':
+                    if (isset($_GET['uuid'])) {
+                        if ($userStat = $stat->getData('all', $_GET['uuid'])) {
+                            echo json_encode(
+                                array(
+                                    "status" => "success",
+                                    "activityLogs" => $userStat
+                                ),
+                                JSON_PRETTY_PRINT
+                            );
+                            return;
+                        }
+                        else {
+                            echo json_encode(
+                                array(
+                                    "status" => "failed",
+                                    "message" => "Activity logs not found."
+                                ),
+                                JSON_PRETTY_PRINT
+                            );
+                            return;
+                        }
+                    }
+                    break;
+                case 'report':
+                    if (isset($_GET['uuid'])) {
+                        if ($userStat = $stat->getData('report', $_GET['uuid'])) {
+                            echo json_encode(
+                                array(
+                                    "status" => "success",
+                                    "activityLogs" => $userStat
+                                ),
+                                JSON_PRETTY_PRINT
+                            );
+                            return;
+                        }
+                        else {
+                            echo json_encode(
+                                array(
+                                    "status" => "failed",
+                                    "message" => "Activity logs not found."
+                                ),
+                                JSON_PRETTY_PRINT
+                            );
+                            return;
+                        }
+                    }
+                    break;
             }
         }
         break;

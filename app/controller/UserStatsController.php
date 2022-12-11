@@ -15,9 +15,9 @@ class UserStatsController
         return $this->var->create($uuid, $unix, $speed, $distance, $calories);
     }
 
-    public function getData($id)
+    public function getData($action, $id)
     {
-        return $this->var->read($id);
+        return $this->var->read($action, $id);
     }
 
     public function getAllData()

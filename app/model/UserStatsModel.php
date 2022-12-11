@@ -27,12 +27,22 @@ class UserStatsModel
         return $this->db->execute();
     }
 
-    public function read($id)
+    public function read($action, $id)
     {
-        $this->db->query("SELECT * FROM $this->table WHERE `user_uuid` = :id");
-        $this->db->bind(":id", $id);
-
-        return $this->db->findAll();
+        switch ($action) {
+            case 'all':
+                $this->db->query("SELECT * FROM $this->table WHERE `user_uuid` = :id");
+                $this->db->bind(":id", $id);
+        
+                return $this->db->findAll();
+                break;
+            case 'report':
+                $this->db->query("SELECT FROM_UNIXTIME(datetime/1000, '%Y-%m-%d') AS `ndate`, SUM(`distance`) AS `totalDistance`, SUM(`calories`) AS `totalCalories` FROM $this->table WHERE `user_uuid` = :id GROUP BY ndate HAVING ndate > DATE_ADD(now(), INTERVAL -7 DAY) ORDER BY ndate DESC LIMIT 7;");
+                $this->db->bind(":id", $id);
+        
+                return $this->db->findAll();
+                break;
+        }
     }
 
     public function readAll()
