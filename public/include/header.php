@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Circle.gg | Dashboard</title>
+    <title>PedalBucks | Dashboard</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="/assets/js/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -80,7 +80,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="/" class="brand-link">
-                <img src="/assets/img/circle_icon.png" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <img src="/assets/index/Logo Group.ico" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light"><b>Pedal</b> Bucks</span>
             </a>
 
