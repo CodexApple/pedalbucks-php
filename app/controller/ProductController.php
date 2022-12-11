@@ -32,9 +32,21 @@ class ProductController
         return $this->var->readAll();
     }
 
-    public function updateData($id, $claim)
+    public function updateData($image)
     {
-        return $this->var->update($id, $claim);
+
+        $id = isset($_POST['id']) ? $_POST['id'] : 1;
+        $name = isset($_POST['name']) ? $_POST['name'] : "";
+        $desc = isset($_POST['description']) ? $_POST['description'] : "";
+        $price = isset($_POST['price']) ? $_POST['price'] : 0;
+        $maxClaim = isset($_POST['max_claims']) ? $_POST['max_claims'] : 0;
+
+        return $this->var->update($id, $name, $desc, $image, $price, $maxClaim);
+    }
+
+    public function updateDataAPI($id, $claim)
+    {
+        return $this->var->updateAPI($id, $claim);
     }
 
     public function deleteData($id)

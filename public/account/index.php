@@ -18,6 +18,36 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 $log->saveData(0, "Added a new Product", $_SESSION['user']->username . " added a new product, detailed link: pedalbucks.gq?pid=");
                 header("Location: /account/?field=4&content=product&action=success");
             } else header("Location: /account/?field=4&content=product&action=failed");
+
+            return;
+        }
+
+        if (isset($_POST['updateProduct'])) {
+            if ($product->updateData($userUtils->uploadImage($_FILES['file']))) {
+                $log->saveData(0, "Updated a Product", $_SESSION['user']->username . " updated an existing product, detailed link: pedalbucks.gq?pid=");
+                header("Location: /account/?field=4&content=product&action=successUpdate");
+            } else header("Location: /account/?field=4&content=product&action=failedUpdate");
+
+            return;
+        }
+
+        if (isset($_POST['updateProfile'])) {
+
+            $uuid = $_POST['uuid'];
+            $address = $_POST['address'];
+            $telephone = $_POST['telephone'];
+            $cellphone = $_POST['cellphone'];
+            $type_choice = $_POST['choice'];
+            $distance_goal = $_POST['distance'];
+            $height = $_POST['height'];
+            $weight = $_POST['weight'];
+            $calories = $_POST['calories'];
+
+            if ($profile->updateData($uuid, $address, $telephone, $cellphone, $type_choice, $distance_goal, $height, $weight, $calories)) {
+                header("Location: /account/?field=5&content=profile&action=successUpdate");
+            } else header("Location: /account/?field=4&content=product&action=failedUpdate");
+
+            return;
         }
 }
 

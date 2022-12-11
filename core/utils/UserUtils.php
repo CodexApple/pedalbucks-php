@@ -4,11 +4,11 @@ class UserUtils
 {
     public function uploadImage($array)
     {
-        $location = $_SERVER["DOCUMENT_ROOT"] . "/public/account/uploads/" . $_SESSION['user']->user_username;
+        $location = $_SERVER["DOCUMENT_ROOT"] . "/public/account/uploads/" . $_SESSION['user']->username;
         $fileName = $array["name"];
         $fileTemp = $array["tmp_name"];
         $fileSize = $array["size"];
-        $newFileName = $_SESSION['user']->user_username . "_" . $fileName;
+        $newFileName = $_SESSION['user']->username . "_" . $fileName;
 
         if (!is_dir($location)) {
             mkdir($location);

@@ -21,6 +21,10 @@
         if (isset($_GET['action'])) {
             if ($_GET['action'] == "success") {
                 $stringUtils->setMessage("success", "Successfully added a new product.");
+            } elseif ($_GET['action'] == "successUpdate") {
+                $stringUtils->setMessage("success", "Successfully updated product.");
+            } elseif ($_GET['action'] == "failedUpdate") {
+                $stringUtils->setMessage("error", "Failed to update product.");
             } else {
                 $stringUtils->setMessage("error", "Failed to add new product.");
             }
@@ -68,15 +72,69 @@
                                 <input type="file" name="file" class="custom-file-input" id="customFile" required />
                                 <label class="custom-file-label" for="customFile">Choose File...</label>
                             </div>
-                            <!-- <div class="custom-file">
-                                <input type="file" name="file" class="custom-file-input" id="customFile" required />
-                                <label class="custom-file-label" for="customFile">Choose File...</label>
-                            </div> -->
                         </div>
                         <div class="modal-footer">
                             <button type="submit" name="saveProduct" class="btn btn-success">
                                 <i class="fas fa-upload"></i>
                                 <span>Save Product</span>
+                            </button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                <i class="fas fa-times-circle"></i>
+                                <span>Cancel</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Update Modal -->
+        <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <form id="taskForm" class="modal-content" method="POST" action="/account/" enctype="multipart/form-data">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Update Product</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" id="id" value="" />
+                            <div class="form-group">
+                                <label>Product Name</label>
+                                <input type="text" name="name" class="form-control" id="name" placeholder="Enter product name" required />
+                            </div>
+                            <div class="form-group">
+                                <label>Product Description</label>
+                                <input type="text" name="description" class="form-control" id="description" placeholder="Enter product description" required />
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Points Required <i class="text-danger">(Required)</i></label>
+                                        <input type="text" name="price" class="form-control" id="price" placeholder="Enter points required to claim" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Max Claims <i class="text-danger">(Required)</i></label>
+                                        <input type="text" name="max_claims" class="form-control" id="max_claims" placeholder="Enter max claim amount" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Product Image</label>
+                                <div class="custom-file">
+                                    <input type="file" name="file" class="custom-file-input" id="customFile" required />
+                                    <label class="custom-file-label" for="customFile">Choose File...</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" name="updateProduct" class="btn btn-success">
+                                <i class="fas fa-upload"></i>
+                                <span>Update Product</span>
                             </button>
                             <button type="button" class="btn btn-danger" data-dismiss="modal">
                                 <i class="fas fa-times-circle"></i>
@@ -161,9 +219,9 @@
                                                 <a href="#" class="btn btn-info" style="margin-right: 5px;">
                                                     <i class="fas fa-eye"></i> View
                                                 </a>
-                                                <a href="#" class="btn btn-warning" style="margin-right: 5px;">
+                                                <button class="btn btn-warning" data-toggle="modal" data-target="#updateModal" onclick="updateBtn('<?= $data->id ?>')" style="margin-right: 5px;">
                                                     <i class="fas fa-edit"></i> Edit
-                                                </a>
+                                                </button>
                                                 <a href="#" class="btn btn-danger" style="margin-right: 5px;">
                                                     <i class="fas fa-trash"></i> Delete
                                                 </a>
@@ -190,4 +248,25 @@
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
+
+    function updateBtn(uuid) {
+        $.ajax({
+            url: '/account/api/product?prod_id=' + uuid,
+            type: 'GET',
+            dataType: 'JSON',
+            success: function(response) {
+                var prod_id = response['id'];
+                var prod_name = response['name'];
+                var prod_desc = response['description'];
+                var prod_price = response['price'];
+                var prod_claims = response['max_claim'];
+
+                document.getElementById('id').value = prod_id;
+                document.getElementById('name').value = prod_name;
+                document.getElementById('description').value = prod_desc;
+                document.getElementById('price').value = prod_price;
+                document.getElementById('max_claims').value = prod_claims;
+            }
+        });
+    }
 </script>

@@ -80,6 +80,55 @@
             </div>
         </div>
 
+        <!-- Update Modal -->
+        <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <form id="taskForm" class="modal-content" method="POST" action="/account/">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Update User</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <input type="hidden" id="uuid" value="">
+                                    <div class="form-group">
+                                        <label>Username <i class="text-danger">(Required)</i></label>
+                                        <input type="text" name="username" class="form-control" id="username" placeholder="Enter task distance" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Password <i class="text-danger">(Required)</i></label>
+                                        <input type="text" name="password" class="form-control" id="password" placeholder="Enter reward value" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label>Email Address <i class="text-danger">(Required)</i></label>
+                                    <input type="text" name="email" class="form-control" id="email" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-warning" data-dismiss="modal">
+                                <i class="fas fa-times-circle"></i>
+                                <span>Cancel</span>
+                            </button>
+                            <button type="submit" name="uploadTaskBtn" class="btn btn-primary">
+                                <i class="fas fa-upload"></i>
+                                <span>Update User</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
@@ -147,16 +196,12 @@
                                                 <a href="#" class="btn btn-info" style="margin-right: 5px;">
                                                     <i class="fas fa-eye"></i> View
                                                 </a>
-                                                <a href="#" class="btn btn-warning" style="margin-right: 5px;">
+                                                <button class="btn btn-warning" data-toggle="modal" data-target="#updateModal" onclick="updateBtn('<?= $data->uuid ?>')" style="margin-right: 5px;">
                                                     <i class="fas fa-edit"></i> Edit
-                                                </a>
+                                                </button>
                                                 <a href="#" class="btn btn-danger" style="margin-right: 5px;">
                                                     <i class="fas fa-trash"></i> Delete
                                                 </a>
-                                                <!-- <button class="btn bg-teal">
-                                                    <i class="fas fa-trash"></i>
-                                                    Publish
-                                                </button> -->
                                             </div>
                                         </td>
                                     </tr>
@@ -170,3 +215,22 @@
     </div>
 </div>
 </div>
+
+<script>
+    function updateBtn(uuid) {
+        $.ajax({
+            url: '/account/api/users?uuid=' + uuid,
+            type: 'GET',
+            dataType: 'JSON',
+            success: function(response) {
+                var username = response['username'];
+                var email = response['email'];
+                var uuid = response['uuid'];
+
+                document.getElementById("uuid").value = uuid;
+                document.getElementById("username").value = username;
+                document.getElementById("email").value = email;
+            }
+        });
+    }
+</script>

@@ -16,7 +16,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                     $productDetails = $product->getData($response->id);
                     $userWallet = $wallet->getData($response->uuid);
 
-                    if($redeem->getData($response->uuid, $response->id)) {
+                    if ($redeem->getData($response->uuid, $response->id)) {
                         echo json_encode(
                             array(
                                 "status" => "failed",
@@ -36,7 +36,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
                             $wallet->updateData($response->uuid, $newPoints);
                             $redeem->saveData($response->uuid, $response->id, $stringUtils->skuGen());
-                            $product->updateData($response->id, $newClaim);
+                            $product->updateDataAPI($response->id, $newClaim);
 
                             echo json_encode(
                                 array(

@@ -47,7 +47,21 @@ class ProductModel
         return $this->db->findAll();
     }
 
-    public function update($id, $claim)
+    public function update($id, $name, $desc, $image, $price, $maxClaim)
+    {
+        $this->db->query("UPDATE $this->table SET `name` = :name, `description` = :desc, `image` = :image, `price` = :price, `max_claim` = :maxClaim WHERE `id` = :id");
+
+        $this->db->bind(":id", $id);
+        $this->db->bind(":name", $name);
+        $this->db->bind(":desc", $desc);
+        $this->db->bind(":image", $image);
+        $this->db->bind(":price", $price);
+        $this->db->bind(":maxClaim", $maxClaim);
+
+        return $this->db->execute();
+    }
+
+    public function updateAPI($id, $claim)
     {
         $this->db->query("UPDATE $this->table SET `current_claim` = :claim WHERE `id` = :id");
 

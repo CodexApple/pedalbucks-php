@@ -60,3 +60,27 @@
     </div>
 </div>
 </div>
+
+<script>
+    $(function() {
+        $("#systemlogs").DataTable({
+            "responsive": true,
+            "paging": true,
+            "searching": true,
+            "lengthChange": true,
+            "autoWidth": true,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#systemlogs .col-md-6:eq(0)');
+    });
+
+    // $(document).ready(function() {
+    //     $("#systemlogs").DataTable({
+    //         "responsive": true,
+    //         "paging": true,
+    //         "searching": true,
+    //         "lengthChange": true,
+    //         "autoWidth": true,
+    //         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    //     }).buttons().container().appendTo('#systemlogs .col-md-6:eq(0)');
+    // });
+</script>
