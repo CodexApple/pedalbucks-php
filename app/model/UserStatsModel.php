@@ -37,7 +37,7 @@ class UserStatsModel
                 return $this->db->findAll();
                 break;
             case 'report':
-                $this->db->query("SELECT FROM_UNIXTIME(datetime/1000, '%Y-%m-%d') AS `ndate`, SUM(`distance`) AS `totalDistance`, SUM(`calories`) AS `totalCalories` FROM $this->table WHERE `user_uuid` = :id GROUP BY ndate HAVING ndate > DATE_ADD(now(), INTERVAL -7 DAY) ORDER BY ndate DESC LIMIT 7;");
+                $this->db->query("SELECT FROM_UNIXTIME(datetime/1000, '%Y-%m-%d') AS `ndate`, SUM(`distance`) AS `totalDistance`, SUM(`calories`) AS `totalCalories` FROM $this->table WHERE `user_uuid` = :id GROUP BY ndate HAVING ndate > DATE_ADD(CURRENT_DATE, INTERVAL -7 DAY) ORDER BY ndate DESC LIMIT 7;");
                 $this->db->bind(":id", $id);
         
                 return $this->db->findAll();
