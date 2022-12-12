@@ -170,7 +170,7 @@
                                 <i class="fas fa-upload"></i>
                                 <span>Update Profile</span>
                             </button>
-                            <button type="button" class="btn btn-warning" data-dismiss="modal">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">
                                 <i class="fas fa-times-circle"></i>
                                 <span>Cancel</span>
                             </button>

@@ -115,9 +115,10 @@ switch ($_SERVER['REQUEST_METHOD']) {
                         "taskName" => $taskDetails->task_name,
                         "taskDescription" => $taskDetails->task_description,
                         "distanceRequired" => $taskDetails->task_distance,
-                        "taskDifficulty" => $data->task_difficulty,
+                        "taskDifficulty" => $taskDetails->task_difficulty,
                         "reward" => $taskDetails->task_reward,
-                        "challengeMode" => $stringUtils->translateContent($taskDetails->is_challenge)
+                        "challengeMode" => $stringUtils->translateContent($taskDetails->is_challenge),
+                        "challengeInt" => $taskDetails->is_challenge
                     ),
                     JSON_PRETTY_PRINT
                 );

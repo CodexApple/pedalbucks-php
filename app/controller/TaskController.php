@@ -32,8 +32,9 @@ class TaskController
         return $this->var->readAll();
     }
 
-    public function updateData()
+    public function updateData($tid, $name, $desc, $distance, $reward, $challenge)
     {
+        return $this->var->update($tid, $name, $desc, $distance, $reward, $challenge);
     }
 
     public function deleteData($id)

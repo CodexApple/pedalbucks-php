@@ -115,13 +115,13 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-warning" data-dismiss="modal">
-                                <i class="fas fa-times-circle"></i>
-                                <span>Cancel</span>
-                            </button>
-                            <button type="submit" name="uploadTaskBtn" class="btn btn-primary">
+                            <button type="submit" name="updateUser" class="btn btn-success">
                                 <i class="fas fa-upload"></i>
                                 <span>Update User</span>
+                            </button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                <i class="fas fa-times-circle"></i>
+                                <span>Cancel</span>
                             </button>
                         </div>
                     </div>

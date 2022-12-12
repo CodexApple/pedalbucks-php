@@ -46,8 +46,18 @@ class TaskModel
         return $this->db->findAll();
     }
 
-    public function update()
+    public function update($tid, $name, $desc, $distance, $reward, $challenge)
     {
+        $this->db->query("UPDATE $this->table SET `task_name` = :name, `task_description` = :desc, `task_distance` = :distance, `task_reward` = :reward, `is_challenge` = :challenge WHERE `id` = :id");
+
+        $this->db->bind(":id", $tid);
+        $this->db->bind(":name", $name);
+        $this->db->bind(":desc", $desc);
+        $this->db->bind(":distance", $distance);
+        $this->db->bind(":reward", $reward);
+        $this->db->bind(":challenge", $challenge);
+
+        return $this->db->execute();
     }
 
     public function delete($id)

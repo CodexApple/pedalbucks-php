@@ -49,6 +49,22 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
             return;
         }
+
+        if (isset($_POST['updateTask'])) {
+
+            $tid = $_POST['uuid'];
+            $name = $_POST['name'];
+            $desc = $_POST['description'];
+            $distance = $_POST['taskDistance'];
+            $reward = $_POST['reward'];
+            $challenge = $_POST['isChallenge'];
+
+            if ($task->updateData($tid, $name, $desc, $distance, $reward, $challenge)) {
+                header("Location: /account/?field=3&content=task&action=successUpdate");
+            } else header("Location: account/?field=3&content=task&action=failedUpdate");
+
+            return;
+        }
 }
 
 if (empty($_SESSION['user'])) {
