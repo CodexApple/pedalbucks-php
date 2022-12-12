@@ -10,12 +10,11 @@ class ProductController
         $this->var = new ProductModel();
     }
 
-    public function saveData()
+    public function saveData($image)
     {
 
         $name = isset($_POST['name']) ? $_POST['name'] : "";
         $desc = isset($_POST['description']) ? $_POST['description'] : "";
-        $image = isset($_POST['image']) ? $_POST['image'] : "";
         $max_claim = isset($_POST['max_claim']) ? $_POST['max_claim'] : 10;
         $price = isset($_POST['price']) ? $_POST['price'] : 0;
 

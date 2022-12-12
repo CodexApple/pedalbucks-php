@@ -14,7 +14,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         }
 
         if (isset($_POST['saveProduct'])) {
-            if ($product->saveData()) {
+            if ($product->saveData($userUtils->uploadImage($_FILES['file']))) {
                 $log->saveData(0, "Added a new Product", $_SESSION['user']->username . " added a new product, detailed link: pedalbucks.gq?pid=");
                 header("Location: /account/?field=4&content=product&action=success");
             } else header("Location: /account/?field=4&content=product&action=failed");
@@ -72,8 +72,26 @@ switch ($_SERVER['REQUEST_METHOD']) {
             $points = $_POST['points'];
 
             if ($wallet->updateData($uuid, $points)) {
-                header("Location: /account/");
-            } else header("Location: /account/");
+                header("Location: /account/?field=3&content=economy&action=successUpdate");
+            } else header("Location: /account/?field=3&content=economy&action=failedUpdate");
+        }
+
+        if (isset($_POST['saveAdvertisement'])) {
+
+            if ($ads->saveData()) {
+                header("Location: /account/?field=2&content=advertisements&action=success");
+            } else header("Location: /account/?field=2&content=advertisements&action=failed");
+
+            return;
+        }
+
+        if (isset($_POST['updateAds'])) {
+
+            if ($ads->updateData()) {
+                header("Location: /account/?field=2&content=advertisements&action=successUpdate");
+            } else header("Location: /account/?field=2&content=advertisements&action=failedUpdate");
+
+            return;
         }
 }
 
