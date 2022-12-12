@@ -10,9 +10,9 @@ class UserStatsController
         $this->var = new UserStatsModel();
     }
 
-    public function saveData($uuid, $unix, $speed, $distance, $calories)
+    public function saveData($uuid, $unix, $duration, $speed, $distance, $calories)
     {
-        return $this->var->create($uuid, $unix, $speed, $distance, $calories);
+        return $this->var->create($uuid, $unix, $duration, $speed, $distance, $calories);
     }
 
     public function getData($action, $id)

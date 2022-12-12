@@ -13,13 +13,14 @@ class UserStatsModel
         $this->db = new DatabaseManager();
     }
 
-    public function create($uuid, $unix, $speed, $distance, $calories)
+    public function create($uuid, $unix, $duration, $speed, $distance, $calories)
     {
-        $this->db->query("INSERT INTO $this->table (`user_uuid`, `datetime`, `speed`, `distance`, `calories`)
-            VALUES(:uuid, :unix, :speed, :distance, :calories)");
+        $this->db->query("INSERT INTO $this->table (`user_uuid`, `datetime`, `duration`, `speed`, `distance`, `calories`)
+            VALUES(:uuid, :unix, :duration, :speed, :distance, :calories)");
 
         $this->db->bind(":uuid", $uuid);
         $this->db->bind(":unix", $unix);
+        $this->db->bind(":duration", $duration);
         $this->db->bind(":speed", $speed);
         $this->db->bind(":distance", $distance);
         $this->db->bind(":calories", $calories);

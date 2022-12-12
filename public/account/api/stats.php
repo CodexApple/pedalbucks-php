@@ -10,7 +10,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
     case "POST":
         switch ($response->submit) {
             case "statsBtn":
-                if ($stat->saveData($response->uuid, $response->datetime, $response->speed, $response->distance, $response->calories)) {
+                if ($stat->saveData($response->uuid, $response->datetime, $response->duration, $response->speed, $response->distance, $response->calories)) {
                     echo json_encode(
                         array(
                             "status" => "success",
