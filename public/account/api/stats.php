@@ -73,6 +73,29 @@ switch ($_SERVER['REQUEST_METHOD']) {
                         }
                     }
                     break;
+                case 'records':
+                    if(isset($_GET['uuid'])) {
+                        if ($userStat = $stat->getData('records', $_GET['uuid'])) {
+                            echo json_encode(
+                                array(
+                                    "status" => "success",
+                                    "records" => $userStat
+                                ),
+                                JSON_PRETTY_PRINT
+                            );
+                            return;
+                        }
+                        else {
+                            echo json_encode(
+                                array(
+                                    "status" => "failed",
+                                    "message" => "Records not found."
+                                ),
+                                JSON_PRETTY_PRINT
+                            );
+                            return;
+                        }
+                    }
             }
         }
         break;
