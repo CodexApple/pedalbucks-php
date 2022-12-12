@@ -28,6 +28,11 @@ class StringUtils
         return ($id != 0 ? "Yes" : "No");
     }
 
+    public function translateClaim($id)
+    {
+        return ($id != 0 ? "Claimed" : "Not Claimed");
+    }
+
     public function isArchive($id)
     {
         return ($id != 0 ? "Hidden" : "Visible");
@@ -36,6 +41,11 @@ class StringUtils
     public function coloredProduct($int)
     {
         return $int == 0 ? "success" : ($int == 1 ? "danger" : null);
+    }
+
+    public function coloredClaim($int)
+    {
+        return $int == 0 ? "danger" : ($int == 1 ? "success" : null);
     }
 
     // $icon = error, warning, info, success

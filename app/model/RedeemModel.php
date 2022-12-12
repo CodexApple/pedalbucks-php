@@ -28,7 +28,7 @@ class RedeemModel extends DatabaseManager
 
     public function read($id, $prod_id)
     {
-        $this->db->query("SELECT * FROM $this->table WHERE `user_uuid` = :uuid AND `product_id` = :prod_id");
+        $this->db->query("SELECT * FROM $this->table WHERE `user_uuid` = :uuid AND `product_code` = :prod_id");
         $this->db->bind(":uuid", $id);
         $this->db->bind(":prod_id", $prod_id);
 

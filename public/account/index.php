@@ -93,6 +93,15 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
             return;
         }
+
+        if (isset($_POST['updateRedeem'])) {
+
+            if ($redeem->updateData($_POST['id'], $_POST['code'])) {
+                header("Location: /account/?field=4&content=redeem&action=successUpdate");
+            } else header("Location: /account/?field=4&content=redeem&action=failedUpdate");
+
+            return;
+        }
 }
 
 if (empty($_SESSION['user'])) {
@@ -121,6 +130,8 @@ switch ($_SESSION['user']->usertype) {
                 require_once $_SERVER['DOCUMENT_ROOT'] . '/public/include/inject/admin/task.php';
             } elseif ($_GET['field'] == 4 && $_GET['content'] == 'product') {
                 require_once $_SERVER['DOCUMENT_ROOT'] . '/public/include/inject/admin/product.php';
+            } elseif ($_GET['field'] == 4 && $_GET['content'] == 'redeem') {
+                require_once $_SERVER['DOCUMENT_ROOT'] . '/public/include/inject/admin/redeem.php';
             } elseif ($_GET['field'] == 5 && $_GET['content'] == 'profile') {
                 require_once $_SERVER['DOCUMENT_ROOT'] . '/public/include/inject/admin/profile.php';
             } elseif ($_GET['field'] == 5 && $_GET['content'] == 'user') {
@@ -134,6 +145,13 @@ switch ($_SESSION['user']->usertype) {
         if (!isset($_GET['field']) && !isset($_GET['content'])) {
             require_once $_SERVER['DOCUMENT_ROOT'] . '/public/include/inject/ISponsor.php';
         } else {
+            if ($_GET['field'] == 2 && $_GET['content'] == 'advertisements') {
+                require_once $_SERVER['DOCUMENT_ROOT'] . '/public/include/inject/admin/advertisements.php';
+            } elseif ($_GET['field'] == 2 && $_GET['content'] == 'features') {
+                require_once $_SERVER['DOCUMENT_ROOT'] . '/public/include/inject/admin/features.php';
+            } elseif ($_GET['field'] == 4 && $_GET['content'] == 'product') {
+                require_once $_SERVER['DOCUMENT_ROOT'] . '/public/include/inject/admin/product.php';
+            }
         }
         break;
     case 3:

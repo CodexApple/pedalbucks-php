@@ -30,6 +30,21 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 $array,
                 JSON_PRETTY_PRINT
             );
+        }
+
+        /**
+         * Code is not working DO NOT USE PUID GETTER
+         */
+
+        elseif ((isset($_GET['puid']))) {
+            foreach ($redeem->getAllData() as $key => $data) {
+                if ($data->user_uuid = $_GET['puid']) {
+                    echo json_encode(
+                        $redeem->getData($data->user_uuid, $data->product_code),
+                        JSON_PRETTY_PRINT
+                    );
+                }
+            }
         } else {
             echo json_encode(
                 array(

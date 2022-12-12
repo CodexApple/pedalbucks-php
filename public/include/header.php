@@ -120,110 +120,126 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="?field=1&content=syslogs" class="nav-link">
-                                        <i class="fas fa-book"></i>
-                                        <p>System Logs</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fas fa-tools"></i>
-                                        <p>
-                                            Website Settings
-                                            <i class="right fas fa-angle-left"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="?field=2&content=advertisements" class="nav-link">
-                                                <i class="fas fa-folder nav-icon"></i>
-                                                <p>Advertisements</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="?field=2&content=features" class="nav-link">
-                                                <i class="fas fa-folder nav-icon"></i>
-                                                <p>Web Features</p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fas fa-coins"></i>
-                                        <p>
-                                            Economy Tools
-                                            <i class="right fas fa-angle-left"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="?field=3&content=economy" class="nav-link">
-                                                <i class="fas fa-folder nav-icon"></i>
-                                                <p>Economy List</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="?field=3&content=task" class="nav-link">
-                                                <i class="fas fa-folder nav-icon"></i>
-                                                <p>Task List</p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fas fa-shopping-cart"></i>
-                                        <p>
-                                            Product Tools
-                                            <i class="right fas fa-angle-left"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="#" class="nav-link">
-                                                <i class="fas fa-folder nav-icon"></i>
-                                                <p>Brand List</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="#" class="nav-link">
-                                                <i class="fas fa-folder nav-icon"></i>
-                                                <p>Category List</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="?field=4&content=product" class="nav-link">
-                                                <i class="fas fa-folder nav-icon"></i>
-                                                <p>Product List</p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fas fa-users"></i>
-                                        <p>
-                                            User Tools
-                                            <i class="right fas fa-angle-left"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="?field=5&content=profile" class="nav-link">
-                                                <i class="fas fa-folder nav-icon"></i>
-                                                <p>Profile List</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="?field=5&content=user" class="nav-link">
-                                                <i class="fas fa-folder nav-icon"></i>
-                                                <p>User List</p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
+                                <?php if ($_SESSION['user']->usertype == 1) : ?>
+                                    <li class="nav-item">
+                                        <a href="?field=1&content=syslogs" class="nav-link">
+                                            <i class="fas fa-book"></i>
+                                            <p>System Logs</p>
+                                        </a>
+                                    </li>
+                                <?php endif; ?>
+                                <?php if ($_SESSION['user']->usertype == 1 || $_SESSION['user']->usertype == 2) : ?>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="fas fa-tools"></i>
+                                            <p>
+                                                Website Settings
+                                                <i class="right fas fa-angle-left"></i>
+                                            </p>
+                                        </a>
+                                        <ul class="nav nav-treeview">
+                                            <li class="nav-item">
+                                                <a href="?field=2&content=advertisements" class="nav-link">
+                                                    <i class="fas fa-folder nav-icon"></i>
+                                                    <p>Advertisements</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="?field=2&content=features" class="nav-link">
+                                                    <i class="fas fa-folder nav-icon"></i>
+                                                    <p>Web Features</p>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                <?php endif; ?>
+                                <?php if ($_SESSION['user']->usertype == 1) : ?>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="fas fa-coins"></i>
+                                            <p>
+                                                Economy Tools
+                                                <i class="right fas fa-angle-left"></i>
+                                            </p>
+                                        </a>
+                                        <ul class="nav nav-treeview">
+                                            <li class="nav-item">
+                                                <a href="?field=3&content=economy" class="nav-link">
+                                                    <i class="fas fa-folder nav-icon"></i>
+                                                    <p>Economy List</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="?field=3&content=task" class="nav-link">
+                                                    <i class="fas fa-folder nav-icon"></i>
+                                                    <p>Task List</p>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                <?php endif; ?>
+                                <?php if ($_SESSION['user']->usertype == 1 || $_SESSION['user']->usertype == 2) : ?>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            <p>
+                                                Product Tools
+                                                <i class="right fas fa-angle-left"></i>
+                                            </p>
+                                        </a>
+                                        <ul class="nav nav-treeview">
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link">
+                                                    <i class="fas fa-folder nav-icon"></i>
+                                                    <p>Brand List</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link">
+                                                    <i class="fas fa-folder nav-icon"></i>
+                                                    <p>Category List</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="?field=4&content=product" class="nav-link">
+                                                    <i class="fas fa-folder nav-icon"></i>
+                                                    <p>Product List</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="?field=4&content=redeem" class="nav-link">
+                                                    <i class="fas fa-folder nav-icon"></i>
+                                                    <p>Redeem List</p>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                <?php endif; ?>
+                                <?php if ($_SESSION['user']->usertype == 1) : ?>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="fas fa-users"></i>
+                                            <p>
+                                                User Tools
+                                                <i class="right fas fa-angle-left"></i>
+                                            </p>
+                                        </a>
+                                        <ul class="nav nav-treeview">
+                                            <li class="nav-item">
+                                                <a href="?field=5&content=profile" class="nav-link">
+                                                    <i class="fas fa-folder nav-icon"></i>
+                                                    <p>Profile List</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="?field=5&content=user" class="nav-link">
+                                                    <i class="fas fa-folder nav-icon"></i>
+                                                    <p>User List</p>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                <?php endif; ?>
                             </ul>
                         </li>
                     </ul>
