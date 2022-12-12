@@ -16,6 +16,49 @@
 
 <div class="content">
     <div class="container-fluid">
+
+    <!-- Update Modal -->
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <form id="taskForm" class="modal-content" method="POST" action="/account/">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Update User Points</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>User UUID <i class="text-danger">(Required)</i></label>
+                                        <input type="text" name="uuid" class="form-control" id="username" placeholder="Enter task distance" required disabled />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Points <i class="text-danger">(Required)</i></label>
+                                        <input type="text" name="points" class="form-control" id="password" placeholder="Enter reward value" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" name="updatePoints" class="btn btn-success">
+                                <i class="fas fa-upload"></i>
+                                <span>Update Points</span>
+                            </button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                <i class="fas fa-times-circle"></i>
+                                <span>Cancel</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
@@ -70,11 +113,26 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php foreach ($task->getAllData() as $key => $data) : ?>
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td><?= $data->task_id ?></td>
+                                    <td><?= $data->user_uuid ?></td>
+                                    <td><?= $data->points ?></td>
+                                    <td class="text-right py-0 align-middle">
+                                            <div class="btn-group btn-group-sm">
+                                                <a href="#" class="btn btn-info" style="margin-right: 5px;">
+                                                    <i class="fas fa-eye"></i> View
+                                                </a>
+                                                <button class="btn btn-warning" data-toggle="modal" data-target="#updateModal" onclick="updateBtn('<?= $data->uuid ?>')" style="margin-right: 5px;">
+                                                    <i class="fas fa-edit"></i> Edit
+                                                </button>
+                                                <a href="#" class="btn btn-danger" style="margin-right: 5px;">
+                                                    <i class="fas fa-trash"></i> Delete
+                                                </a>
+                                            </div>
+                                        </td>
                                 </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>

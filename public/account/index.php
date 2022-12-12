@@ -65,6 +65,16 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
             return;
         }
+
+        if (isset($_POST['updatePoints'])) {
+
+            $uuid = $_POST['uuid'];
+            $points = $_POST['points'];
+
+            if ($wallet->updateData($uuid, $points)) {
+                header("Location: /account/");
+            } else header("Location: /account/");
+        }
 }
 
 if (empty($_SESSION['user'])) {
