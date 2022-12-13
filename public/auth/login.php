@@ -20,7 +20,7 @@ if (!empty($_SESSION['user'])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Pedalbucks PH | Log In</title>
-    <link rel="icon" type="image/x-icon" href="/assets/index/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="/assets/index/PEDALBUCKS LOGO.ico" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="/assets/js/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="/assets/js/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
@@ -36,7 +36,7 @@ if (!empty($_SESSION['user'])) {
                 <a href="/" class="h1"><b>Pedal</b>Bucks</a>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Sign in to start your session</p>
+                <p class="login-box-msg">Sign in to start</p>
 
                 <form method="POST">
                     <div class="input-group mb-3">
